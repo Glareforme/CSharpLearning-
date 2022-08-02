@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32616.157
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskNUnit", "TestsForTests\TaskNUnit.csproj", "{0186F394-2E55-4451-B9D0-7B896B013FD2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0186F394-2E55-4451-B9D0-7B896B013FD2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0186F394-2E55-4451-B9D0-7B896B013FD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0186F394-2E55-4451-B9D0-7B896B013FD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0186F394-2E55-4451-B9D0-7B896B013FD2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CEC8CD27-B52B-4434-A589-F473A3999BEB}
+	EndGlobalSection
+EndGlobal
