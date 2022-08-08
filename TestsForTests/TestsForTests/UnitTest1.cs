@@ -5,16 +5,16 @@ namespace TestsForTests
         [Test]
         public void Task1()
         {
-            string a = "aasdadada23131#$@";
-            string b = "aasdadada23131#$@";
+            var a = "aasdadada23131#$@";
+            var b = "aasdadada23131#$@";
 
             Assert.That(a, Is.EqualTo(b));
         }
         [Test]
         public void Task2()
         {
-            List <string> first = new List<string>();
-            List <string> second = new List<string>();
+            var first = new List<string>();
+            var second = new List<string>();
 
             first.Add("dsada");
             second.Add("dsada");
@@ -24,8 +24,8 @@ namespace TestsForTests
         [Test]
         public void Task3()
         {
-            List<string> first = new List<string>();
-            string pes = "pes";
+            var first = new List<string>();
+            var pes = "pes";
 
             first.Add("dsada");
             first.Add("xzczczsad");
