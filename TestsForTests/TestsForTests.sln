@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32616.157
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskNUnit", "TestsForTests\TaskNUnit.csproj", "{0186F394-2E55-4451-B9D0-7B896B013FD2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskNUnit", "TestsForTests\TaskNUnit.csproj", "{0186F394-2E55-4451-B9D0-7B896B013FD2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Selenium", "Selenium\Selenium.csproj", "{D51CD01D-1465-4F8B-8C00-AD95F3167FD2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Selenium", "Selenium\Selenium.csproj", "{D51CD01D-1465-4F8B-8C00-AD95F3167FD2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpecFlowProject1", "SpecFlowProject1\SpecFlowProject1.csproj", "{794D59D8-84DE-45BC-884E-CAD2112F6084}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{D51CD01D-1465-4F8B-8C00-AD95F3167FD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D51CD01D-1465-4F8B-8C00-AD95F3167FD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D51CD01D-1465-4F8B-8C00-AD95F3167FD2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{794D59D8-84DE-45BC-884E-CAD2112F6084}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{794D59D8-84DE-45BC-884E-CAD2112F6084}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{794D59D8-84DE-45BC-884E-CAD2112F6084}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{794D59D8-84DE-45BC-884E-CAD2112F6084}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
