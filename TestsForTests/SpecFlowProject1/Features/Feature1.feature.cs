@@ -416,6 +416,55 @@ this.FeatureBackground();
 #line 60
  testRunner.And("Click on confirm search button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
+#line 61
+ testRunner.And("Click on \'More\' button for \'first product\' found", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+                TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Quantity",
+                            "Size",
+                            "Color"});
+                table4.AddRow(new string[] {
+                            "3",
+                            "L",
+                            "white"});
+#line 62
+ testRunner.And("Select in details for product", ((string)(null)), table4, "And ");
+#line hidden
+#line 65
+ testRunner.And("Click Add to cart on \'More\' product page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 66
+ testRunner.And("Click \'Continue shopping\' in modal window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 67
+ testRunner.And("Enter \'Printed summer dress\' in search input field", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 68
+ testRunner.And("Click Add to cart on \'More\' product page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+                TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Quantity",
+                            "Size",
+                            "Color"});
+                table5.AddRow(new string[] {
+                            "5",
+                            "m",
+                            "Orange"});
+#line 69
+ testRunner.And("Select in details for product", ((string)(null)), table5, "And ");
+#line hidden
+#line 72
+ testRunner.And("Click Add to cart on \'More\' product page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 73
+ testRunner.And("Click \'Proceed to checkout\' in modal window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 74
+ testRunner.And("Delete \'Printed summer dress\' from basket", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 75
+ testRunner.Then("In busket list only \'Blouse\' left", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
             }
             this.ScenarioCleanup();
         }

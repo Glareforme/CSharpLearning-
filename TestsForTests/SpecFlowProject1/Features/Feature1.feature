@@ -58,3 +58,19 @@ Scenario: Task 5
 Scenario: Task 6
 	When Enter 'Blouse' in search input field
 	And Click on confirm search button
+	And Click on 'More' button for 'first product' found
+	And Select in details for product
+		| Quantity | Size | Color |
+		| 3        | L    | white |
+	And Click Add to cart on 'More' product page
+	And Click 'Continue shopping' in modal window
+	And Enter 'Printed summer dress' in search input field
+	And Click Add to cart on 'More' product page
+	And Select in details for product
+		| Quantity | Size | Color  |
+		| 5        | m    | Orange |
+	And Click Add to cart on 'More' product page
+	And Click 'Proceed to checkout' in modal window
+	And Delete 'Printed summer dress' from basket 
+	Then In busket list only 'Blouse' left 
+		
