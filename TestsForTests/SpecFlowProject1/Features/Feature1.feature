@@ -37,7 +37,7 @@ Scenario: Check if in busket correct displayed all added products
 	When User search for 'Printed summer dress', add to cart first found product with details and open basket 
 		| Quantity | Size | Color  |
 		| 5        | M    | Orange |
-	Then In cart for 2 added products dispyaed correct 'Name','Color','Size', 'Unit price', 'Quantity of goods', 'Total price'
+	Then In cart for 2 added products displayed correct 'Name','Color','Size', 'Unit price', 'Quantity of goods', 'Total price'
 
 @task6 @chrome
 Scenario: Check if delete from busket function work correctly

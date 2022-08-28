@@ -7,10 +7,10 @@ namespace SpecFlowProject1.Support.POM.Methods
 {
     internal class ModalWindowMeth
     {
-        internal static string TakeActualText(string text)
+        internal static string TakeActualText(/*string text*/)
         {
-            var actualText = DriverForChrome.GetDriver().FindElement(ModalWindowLoc.successfullAddingText)
-                .GetAttribute("textContent");
+            var actualText = BaseData.RemoveRedundantChars(DriverForChrome.GetDriver().FindElement(ModalWindowLoc.successfullAddingText)
+                .GetAttribute("textContent"));
             return actualText;
         }
         internal static void ClickOnMoveToCartButton() => DriverForChrome.GetDriver()
@@ -22,7 +22,7 @@ namespace SpecFlowProject1.Support.POM.Methods
             DriverForChrome.WaitForElement(ModalWindowLoc.totalPriceOfProduct);
             ProductsParameters.TotalPrice = Int32.Parse(BaseData.RemoveNonNumbers(DriverForChrome.GetDriver()
                 .FindElement(ModalWindowLoc.totalPriceOfProduct).Text));
-            return ProductsParameters.TotalPrice;
+            return (int)ProductsParameters.TotalPrice;
         }
     }
 }

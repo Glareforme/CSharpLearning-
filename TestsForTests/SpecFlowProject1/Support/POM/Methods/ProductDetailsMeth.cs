@@ -33,17 +33,17 @@ namespace SpecFlowProject1.Support.POM.Methods
             ProductsParameters.Name = DriverForChrome.GetDriver().FindElement(ProductDetailsLoc.productName).Text;
             return ProductsParameters.Name;
         }
-        internal static int PriceOfAddedProduct()
+        internal static string PriceOfAddedProduct()
         {
-            ProductsParameters.Price = Int32.Parse(BaseData.RemoveNonNumbers(DriverForChrome.GetDriver()
-                .FindElement(ProductDetailsLoc.priceProduct).Text));
-            return  ProductsParameters.Price;
+            ProductsParameters.Price = BaseData.RemoveNonNumbers(DriverForChrome.GetDriver()
+                .FindElement(ProductDetailsLoc.priceProduct).Text);
+            return  (string)ProductsParameters.Price;
         }
-        internal static int QuantityOfAddedProduct()
+        internal static string QuantityOfAddedProduct()
         {
-            ProductsParameters.QuantityOfGoods = Int32.Parse(BaseData.RemoveNonNumbers(DriverForChrome.GetDriver()
-                .FindElement(ProductDetailsLoc.quantityOfProduct).GetAttribute("value")));
-            return ProductsParameters.QuantityOfGoods;
+            ProductsParameters.QuantityOfGoods = BaseData.RemoveNonNumbers(DriverForChrome.GetDriver()
+                .FindElement(ProductDetailsLoc.quantityOfProduct).GetAttribute("value"));
+            return (string)ProductsParameters.QuantityOfGoods;
         }
         internal static string ColorOfAddedProduct()
         {

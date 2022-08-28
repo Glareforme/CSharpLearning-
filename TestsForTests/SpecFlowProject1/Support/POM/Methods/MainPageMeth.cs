@@ -53,7 +53,7 @@ namespace SpecFlowProject1.Support.POM.Methods
         internal static int SevedPriceOfProduct()
         {
             ProductsParameters.Price = Int32.Parse(BaseData.RemoveNonNumbers(DriverForChrome.GetDriver().FindElement(MainPageLoc.priceForSelectedProduct).Text));
-            return ProductsParameters.Price;
+            return (int)ProductsParameters.Price;
         }
         internal static void ClickAddToCart()
         {

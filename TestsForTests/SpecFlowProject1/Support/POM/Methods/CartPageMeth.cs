@@ -7,16 +7,31 @@ namespace SpecFlowProject1.Support.POM.Methods
 {
     internal class CartPageMeth
     {
-        internal static string AddedToCartProductName()
+        internal static string AddedToCartProductName(int select)
         {
-            ProductsParameters.Name = DriverForChrome.GetDriver().FindElement(CartPageLoc.nameOfFirstProduct)
-                .GetAttribute("textContent");
-            return ProductsParameters.Name;
+            switch (select)
+            {
+                case 1:
+                    {
+                        ProductsParameters.Name = BaseData.RemoveRedundantChars(DriverForChrome.GetDriver().FindElement(CartPageLoc.nameOfLastProduct)
+                   .GetAttribute("textContent"));
+                        return ProductsParameters.Name;
+                        break;
+                    }
+                case 2:
+                    {
+                        ProductsParameters.Name = BaseData.RemoveRedundantChars(DriverForChrome.GetDriver().FindElement(CartPageLoc.nameOfFirstProduct)
+                  .GetAttribute("textContent"));
+                        return ProductsParameters.Name;
+                        break;
+                    }
+            }
+            return null;
         }
-        internal static int AddedToCartProductPrice() 
+        internal static int AddedToCartProductPrice()
         {
             ProductsParameters.Price = Int32.Parse(BaseData.RemoveNonNumbers(DriverForChrome.GetDriver().FindElement(CartPageLoc.priceOfFirstProduct).Text));
-            return ProductsParameters.Price;
+            return (int)ProductsParameters.Price;
         }
         internal static void DeleteProductFromCart()
         {

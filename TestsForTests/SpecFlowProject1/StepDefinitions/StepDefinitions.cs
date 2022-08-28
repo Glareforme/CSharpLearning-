@@ -53,7 +53,7 @@ namespace SpecFlowProject1.StepDefinitions
             var expectedName = MainPageMeth.SavedNameOfProduct();
             var expectedPrice = MainPageMeth.SevedPriceOfProduct();
             ModalWindowMeth.ClickOnMoveToCartButton();
-            var actualName = CartPageMeth.AddedToCartProductName();
+            var actualName = CartPageMeth.AddedToCartProductName(1);
             var actualPrice = CartPageMeth.AddedToCartProductPrice();
             Assert.IsTrue(actualName.Contains(expectedName));
             Assert.AreEqual(expectedPrice, actualPrice);
@@ -73,7 +73,7 @@ namespace SpecFlowProject1.StepDefinitions
         [Then(@"Message '([^']*)' displayed in modal window")]
         public void ThenMessageDisplayedInModalWindow(string expectedRes)
         {
-            var actualMess = ModalWindowMeth.TakeActualText(BaseData.succAddedToCart);
+            var actualMess = ModalWindowMeth.TakeActualText();
 
             Assert.IsTrue(actualMess.Contains(expectedRes));
         }
@@ -120,17 +120,17 @@ namespace SpecFlowProject1.StepDefinitions
         }
 
 
-        [Then(@"In cart for (.*) added products dispyaed correct '([^']*)','([^']*)','([^']*)', '([^']*)', '([^']*)', '([^']*)'")]
+        [Then(@"In cart for (.*) added products displayed correct '([^']*)','([^']*)','([^']*)', '(.*)', '(.*)', '(.*)'")]
         public void ThenInCartForAddedProductsDispyaedCorrect(int p0, string expectedName, string expectedSize, string expectedColor, string expUnitPrice, string expQuantity, string expTotalPrice)
         {
             expectedName = (string)ScenarioContext.Current["Name of first product"];
-            /*    expectedSize = (string)ScenarioContext.Current["Size of first product"];
-                expectedColor = (string)ScenarioContext.Current["Color of first product"];
-                expUnitPrice = (int)ScenarioContext.Current["Price for first product"];
-                expQuantity = (int)ScenarioContext.Current["Quantity of first product"];
-                expTotalPrice = (int)ScenarioContext.Current["Total price of second product"];*/
-            string actualName = CartPageMeth.AddedToCartProductName();
-            Assert.AreEqual(expectedName, actualName);
+/*            expectedSize = (string)ScenarioContext.Current["Size of first product"];
+            expectedColor = (string)ScenarioContext.Current["Color of first product"];
+            expUnitPrice = (string)ScenarioContext.Current["Price for first product"];
+            expQuantity = (string)ScenarioContext.Current["Quantity of first product"];
+            expTotalPrice = (string)ScenarioContext.Current["Total price of second product"];*/
+            var actualName = CartPageMeth.AddedToCartProductName(2);
+            Assert.IsTrue(expectedName.Contains(actualName));
             Assert.IsTrue(true);
         }
 
@@ -145,7 +145,7 @@ namespace SpecFlowProject1.StepDefinitions
         public void ThenInBusketListOnlyLeft(string expected)
         {
             DriverForChrome.RefreshPage();
-            var actual = CartPageMeth.AddedToCartProductName();
+            var actual = CartPageMeth.AddedToCartProductName(1);
             Assert.IsTrue(actual.Contains(expected));
         }
     }

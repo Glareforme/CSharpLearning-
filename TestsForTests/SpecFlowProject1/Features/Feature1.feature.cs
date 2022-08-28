@@ -261,8 +261,8 @@ this.ScenarioInitialize(scenarioInfo);
                         "ils and open basket", ((string)(null)), table3, "When ");
 #line hidden
 #line 40
- testRunner.Then("In cart for 2 added products dispyaed correct \'Name\',\'Color\',\'Size\', \'Unit price\'" +
-                        ", \'Quantity of goods\', \'Total price\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("In cart for 2 added products displayed correct \'Name\',\'Color\',\'Size\', \'Unit price" +
+                        "\', \'Quantity of goods\', \'Total price\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
