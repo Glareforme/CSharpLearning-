@@ -50,10 +50,10 @@ namespace SpecFlowProject1.Support.POM.Methods
             ProductsParameters.Name = DriverForChrome.GetDriver().FindElement(MainPageLoc.nameOfSelectedProduct).GetAttribute("title");
             return ProductsParameters.Name;
         }
-        internal static int SevedPriceOfProduct()
+        internal static string SevedPriceOfProduct()
         {
-            ProductsParameters.Price = Int32.Parse(BaseData.RemoveNonNumbers(DriverForChrome.GetDriver().FindElement(MainPageLoc.priceForSelectedProduct).Text));
-            return (int)ProductsParameters.Price;
+            ProductsParameters.Price = BaseData.RemoveNonNumbers(DriverForChrome.GetDriver().FindElement(MainPageLoc.priceForSelectedProduct).Text);
+            return (string)ProductsParameters.Price;
         }
         internal static void ClickAddToCart()
         {

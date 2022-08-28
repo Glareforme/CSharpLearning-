@@ -28,10 +28,80 @@ namespace SpecFlowProject1.Support.POM.Methods
             }
             return null;
         }
-        internal static int AddedToCartProductPrice()
+        internal static string AddedToCartProductPrice(int select)
         {
-            ProductsParameters.Price = Int32.Parse(BaseData.RemoveNonNumbers(DriverForChrome.GetDriver().FindElement(CartPageLoc.priceOfFirstProduct).Text));
-            return (int)ProductsParameters.Price;
+            switch (select)
+            {
+                case 1:
+                    ProductsParameters.Price = BaseData.RemoveNonNumbers(DriverForChrome.GetDriver().FindElement(CartPageLoc.priceOfSecondProduct).Text);
+                    return (string)ProductsParameters.Price;
+                    break;
+                case 2:
+                    ProductsParameters.Price = BaseData.RemoveNonNumbers(DriverForChrome.GetDriver().FindElement(CartPageLoc.priceofFirstProduct).Text);
+                    return (string)ProductsParameters.Price;
+                    break;
+            }
+            return null;
+        }
+        internal static string AddedToCartProductSize(int select)
+        {
+            switch (select)
+            {
+                case 1:
+                    ProductsParameters.Size = BaseData.ExtractSizeOnCartPage(DriverForChrome.GetDriver().FindElement(CartPageLoc.colorAndSizeOfSecondProduct).Text);
+                    return ProductsParameters.Size;
+                    break;
+                case 2:
+                    ProductsParameters.Size = BaseData.ExtractSizeOnCartPage(DriverForChrome.GetDriver().FindElement(CartPageLoc.colorAndSizeOfFirstProduct).Text);
+                    return ProductsParameters.Size;
+                    break;
+            }
+            return null;
+        }
+        internal static string AddedToCartProductColor(int select)
+        {
+            switch (select)
+            {
+                case 1:
+                    ProductsParameters.Color = BaseData.ExtractColorOnCartPage(DriverForChrome.GetDriver().FindElement(CartPageLoc.colorAndSizeOfSecondProduct).Text);
+                    return ProductsParameters.Color;
+                    break;
+                case 2:
+                    ProductsParameters.Color = BaseData.ExtractColorOnCartPage(DriverForChrome.GetDriver().FindElement(CartPageLoc.colorAndSizeOfFirstProduct).Text);
+                    return ProductsParameters.Color;
+                    break;
+            }
+            return null;
+        }
+        internal static string AddedToCartProductQuantity(int select)
+        {
+            switch (select)
+            {
+                case 2:
+                    ProductsParameters.QuantityOfGoods = DriverForChrome.GetDriver().FindElement(CartPageLoc.quantityOfFirstProduct).GetAttribute("value");
+                    return (string)ProductsParameters.QuantityOfGoods;
+                    break;
+                case 1:
+                    ProductsParameters.QuantityOfGoods = DriverForChrome.GetDriver().FindElement(CartPageLoc.quantityOfSecondProduct).GetAttribute("value");
+                    return (string)ProductsParameters.QuantityOfGoods;
+                    break;
+            }
+            return null;
+        }
+        internal static string AddedToCartProductTotalPrice(int select)
+        {
+            switch (select)
+            {
+                case 2:
+                    ProductsParameters.TotalPrice = BaseData.RemoveNonNumbers(DriverForChrome.GetDriver().FindElement(CartPageLoc.totalPriceOfFirstProduct).Text);
+                    return (string)ProductsParameters.TotalPrice;
+                    break;
+                case 1:
+                    ProductsParameters.TotalPrice = BaseData.RemoveNonNumbers(DriverForChrome.GetDriver().FindElement(CartPageLoc.totalPriceOfSecondProduct).Text);
+                    return (string)ProductsParameters.TotalPrice;
+                    break;
+            }
+            return null;
         }
         internal static void DeleteProductFromCart()
         {

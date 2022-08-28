@@ -13,6 +13,6 @@ namespace SpecFlowProject1.Support.POM.Locators
         internal static By continueShoping = By.XPath("//span[@title='Continue shopping']");
         internal static By moveToCart = By.XPath("//a[@title='Proceed to checkout']");
         internal static By closeModalWindow = By.XPath("//span[@title='Close window']");
-        internal static By totalPriceOfProduct = By.XPath("//span[@class='ajax_block_products_total']"); 
+        internal static By totalPriceOfProduct = By.Id("layer_cart_product_price"); 
     }
 }
