@@ -10,50 +10,50 @@ namespace SpecFlowProject1.Support.POM.Methods
     {
         internal static void EnterQuantityWithKeyboard(string quantry)
         {
-            DriverForChrome.GetDriver().FindElement(ProductDetailsLoc.quantryField).Clear();
-            DriverForChrome.GetDriver().FindElement(ProductDetailsLoc.quantryField).SendKeys(quantry);
+            DriverForBrowser.GetDriver().FindElement(ProductDetailsLoc.quantryField).Clear();
+            DriverForBrowser.GetDriver().FindElement(ProductDetailsLoc.quantryField).SendKeys(quantry);
         }
-        internal static void SelectSize(string selectedSize) => DriverForChrome.SelectElementInDropDown(ProductDetailsLoc.selectSizeDropDown, selectedSize);
+        internal static void SelectSize(string selectedSize) => DriverForBrowser.SelectElementInDropDown(ProductDetailsLoc.selectSizeDropDown, selectedSize);
         internal static void SelectColor(string color)
         {
             switch (color)
             {
                 case ("Orange"):
-                    DriverForChrome.GetDriver().FindElement(ProductDetailsLoc.oragneSelectedColor).Click();
+                    DriverForBrowser.GetDriver().FindElement(ProductDetailsLoc.oragneSelectedColor).Click();
                     break;
                 case ("Write"):
-                    DriverForChrome.GetDriver().FindElement(ProductDetailsLoc.whiteSelectedColor).Click();
+                    DriverForBrowser.GetDriver().FindElement(ProductDetailsLoc.whiteSelectedColor).Click();
                     break;
             }
         }
-        internal static void AddToCart() => DriverForChrome.GetDriver()
+        internal static void AddToCart() => DriverForBrowser.GetDriver()
             .FindElement(ProductDetailsLoc.addToCartButton).Click();
         internal static string NameOfAddedProduct()
         {
-            ProductsParameters.Name = DriverForChrome.GetDriver().FindElement(ProductDetailsLoc.productName).Text;
+            ProductsParameters.Name = DriverForBrowser.GetDriver().FindElement(ProductDetailsLoc.productName).Text;
             return ProductsParameters.Name;
         }
         internal static string PriceOfAddedProduct()
         {
-            ProductsParameters.Price = BaseData.RemoveNonNumbers(DriverForChrome.GetDriver()
+            ProductsParameters.Price = BaseData.RemoveNonNumbers(DriverForBrowser.GetDriver()
                 .FindElement(ProductDetailsLoc.priceProduct).Text);
             return  (string)ProductsParameters.Price;
         }
         internal static string QuantityOfAddedProduct()
         {
-            ProductsParameters.QuantityOfGoods = BaseData.RemoveNonNumbers(DriverForChrome.GetDriver()
+            ProductsParameters.QuantityOfGoods = BaseData.RemoveNonNumbers(DriverForBrowser.GetDriver()
                 .FindElement(ProductDetailsLoc.quantityOfProduct).GetAttribute("value"));
             return (string)ProductsParameters.QuantityOfGoods;
         }
         internal static string ColorOfAddedProduct()
         {
-            ProductsParameters.Color = DriverForChrome.GetDriver()
+            ProductsParameters.Color = DriverForBrowser.GetDriver()
                 .FindElement(ProductDetailsLoc.getSelectedColor).GetAttribute("title");
             return ProductsParameters.Color;
         }
         internal static string SizeOfAddedProduct()
         {
-            ProductsParameters.Size = DriverForChrome.GetDriver()
+            ProductsParameters.Size = DriverForBrowser.GetDriver()
                 .FindElement(ProductDetailsLoc.getSelectedSize).Text;
             return ProductsParameters.Size;
         }

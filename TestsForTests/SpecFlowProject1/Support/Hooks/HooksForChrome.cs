@@ -7,15 +7,15 @@ namespace SpecFlowProject1.Support.Hooks
     public sealed class HooksForChrome
     {
         [BeforeScenario("@chrome")]
-        public static void BeforeScenario() => DriverForChrome.GetDriver().Navigate().GoToUrl(BaseData.baseUrl);
+        public static void BeforeScenario() => DriverForBrowser.GetDriver().Navigate().GoToUrl(BaseData.baseUrl);
 
         [AfterScenario("@chrome")]
-        public static void AfterScenario() => DriverForChrome.CleanDriver();
+        public static void AfterScenario() => DriverForBrowser.CleanDriver();
 
         [AfterTestRun(Order = 1)]
         public static void EndOfTests()
         {
-            DriverForChrome.CloseDriver();
+            DriverForBrowser.CloseDriver();
         }
     }
 }

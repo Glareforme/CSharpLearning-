@@ -13,14 +13,14 @@ namespace SpecFlowProject1.Support.POM.Methods
             {
                 case 1:
                     {
-                        ProductsParameters.Name = BaseData.RemoveRedundantChars(DriverForChrome.GetDriver().FindElement(CartPageLoc.nameOfLastProduct)
+                        ProductsParameters.Name = BaseData.RemoveRedundantChars(DriverForBrowser.GetDriver().FindElement(CartPageLoc.nameOfLastProduct)
                    .GetAttribute("textContent"));
                         return ProductsParameters.Name;
                         break;
                     }
                 case 2:
                     {
-                        ProductsParameters.Name = BaseData.RemoveRedundantChars(DriverForChrome.GetDriver().FindElement(CartPageLoc.nameOfFirstProduct)
+                        ProductsParameters.Name = BaseData.RemoveRedundantChars(DriverForBrowser.GetDriver().FindElement(CartPageLoc.nameOfFirstProduct)
                   .GetAttribute("textContent"));
                         return ProductsParameters.Name;
                         break;
@@ -33,11 +33,11 @@ namespace SpecFlowProject1.Support.POM.Methods
             switch (select)
             {
                 case 1:
-                    ProductsParameters.Price = BaseData.RemoveNonNumbers(DriverForChrome.GetDriver().FindElement(CartPageLoc.priceOfSecondProduct).Text);
+                    ProductsParameters.Price = BaseData.RemoveNonNumbers(DriverForBrowser.GetDriver().FindElement(CartPageLoc.priceOfSecondProduct).Text);
                     return (string)ProductsParameters.Price;
                     break;
                 case 2:
-                    ProductsParameters.Price = BaseData.RemoveNonNumbers(DriverForChrome.GetDriver().FindElement(CartPageLoc.priceofFirstProduct).Text);
+                    ProductsParameters.Price = BaseData.RemoveNonNumbers(DriverForBrowser.GetDriver().FindElement(CartPageLoc.priceofFirstProduct).Text);
                     return (string)ProductsParameters.Price;
                     break;
             }
@@ -48,11 +48,11 @@ namespace SpecFlowProject1.Support.POM.Methods
             switch (select)
             {
                 case 1:
-                    ProductsParameters.Size = BaseData.ExtractSizeOnCartPage(DriverForChrome.GetDriver().FindElement(CartPageLoc.colorAndSizeOfSecondProduct).Text);
+                    ProductsParameters.Size = BaseData.ExtractSizeOnCartPage(DriverForBrowser.GetDriver().FindElement(CartPageLoc.colorAndSizeOfSecondProduct).Text);
                     return ProductsParameters.Size;
                     break;
                 case 2:
-                    ProductsParameters.Size = BaseData.ExtractSizeOnCartPage(DriverForChrome.GetDriver().FindElement(CartPageLoc.colorAndSizeOfFirstProduct).Text);
+                    ProductsParameters.Size = BaseData.ExtractSizeOnCartPage(DriverForBrowser.GetDriver().FindElement(CartPageLoc.colorAndSizeOfFirstProduct).Text);
                     return ProductsParameters.Size;
                     break;
             }
@@ -63,11 +63,11 @@ namespace SpecFlowProject1.Support.POM.Methods
             switch (select)
             {
                 case 1:
-                    ProductsParameters.Color = BaseData.ExtractColorOnCartPage(DriverForChrome.GetDriver().FindElement(CartPageLoc.colorAndSizeOfSecondProduct).Text);
+                    ProductsParameters.Color = BaseData.ExtractColorOnCartPage(DriverForBrowser.GetDriver().FindElement(CartPageLoc.colorAndSizeOfSecondProduct).Text);
                     return ProductsParameters.Color;
                     break;
                 case 2:
-                    ProductsParameters.Color = BaseData.ExtractColorOnCartPage(DriverForChrome.GetDriver().FindElement(CartPageLoc.colorAndSizeOfFirstProduct).Text);
+                    ProductsParameters.Color = BaseData.ExtractColorOnCartPage(DriverForBrowser.GetDriver().FindElement(CartPageLoc.colorAndSizeOfFirstProduct).Text);
                     return ProductsParameters.Color;
                     break;
             }
@@ -78,11 +78,11 @@ namespace SpecFlowProject1.Support.POM.Methods
             switch (select)
             {
                 case 2:
-                    ProductsParameters.QuantityOfGoods = DriverForChrome.GetDriver().FindElement(CartPageLoc.quantityOfFirstProduct).GetAttribute("value");
+                    ProductsParameters.QuantityOfGoods = DriverForBrowser.GetDriver().FindElement(CartPageLoc.quantityOfFirstProduct).GetAttribute("value");
                     return (string)ProductsParameters.QuantityOfGoods;
                     break;
                 case 1:
-                    ProductsParameters.QuantityOfGoods = DriverForChrome.GetDriver().FindElement(CartPageLoc.quantityOfSecondProduct).GetAttribute("value");
+                    ProductsParameters.QuantityOfGoods = DriverForBrowser.GetDriver().FindElement(CartPageLoc.quantityOfSecondProduct).GetAttribute("value");
                     return (string)ProductsParameters.QuantityOfGoods;
                     break;
             }
@@ -93,11 +93,11 @@ namespace SpecFlowProject1.Support.POM.Methods
             switch (select)
             {
                 case 2:
-                    ProductsParameters.TotalPrice = BaseData.RemoveNonNumbers(DriverForChrome.GetDriver().FindElement(CartPageLoc.totalPriceOfFirstProduct).Text);
+                    ProductsParameters.TotalPrice = BaseData.RemoveNonNumbers(DriverForBrowser.GetDriver().FindElement(CartPageLoc.totalPriceOfFirstProduct).Text);
                     return (string)ProductsParameters.TotalPrice;
                     break;
                 case 1:
-                    ProductsParameters.TotalPrice = BaseData.RemoveNonNumbers(DriverForChrome.GetDriver().FindElement(CartPageLoc.totalPriceOfSecondProduct).Text);
+                    ProductsParameters.TotalPrice = BaseData.RemoveNonNumbers(DriverForBrowser.GetDriver().FindElement(CartPageLoc.totalPriceOfSecondProduct).Text);
                     return (string)ProductsParameters.TotalPrice;
                     break;
             }
@@ -105,8 +105,8 @@ namespace SpecFlowProject1.Support.POM.Methods
         }
         internal static void DeleteProductFromCart()
         {
-            DriverForChrome.MoveToElement(CartPageLoc.deleteProductButton);
-            DriverForChrome.GetDriver().FindElement(CartPageLoc.deleteProductButton).Click();
+            DriverForBrowser.MoveToElement(CartPageLoc.deleteProductButton);
+            DriverForBrowser.GetDriver().FindElement(CartPageLoc.deleteProductButton).Click();
         }
     }
 }

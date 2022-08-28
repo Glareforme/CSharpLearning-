@@ -10,31 +10,31 @@ namespace SpecFlowProject1.Support.POM.Methods
     {
         internal static void InputInSearchField(string searchWord)
         {
-            DriverForChrome.GetDriver().FindElement(MainPageLoc.searchInputField).Clear();
-            DriverForChrome.GetDriver().FindElement(MainPageLoc.searchInputField).SendKeys(searchWord);
+            DriverForBrowser.GetDriver().FindElement(MainPageLoc.searchInputField).Clear();
+            DriverForBrowser.GetDriver().FindElement(MainPageLoc.searchInputField).SendKeys(searchWord);
 
         }
-        internal static void ConfirmSearch() => DriverForChrome.GetDriver()
+        internal static void ConfirmSearch() => DriverForBrowser.GetDriver()
             .FindElement(MainPageLoc.searchSubmitButton)
             .Click();
         internal static string GetTextFromSearchResult()
         {
-            var actualResult = DriverForChrome.GetDriver()
+            var actualResult = DriverForBrowser.GetDriver()
                 .FindElement(MainPageLoc.searchResultKeyWord)
                 .Text;
             return BaseData.RemoveNonWords(actualResult);
         }
-        internal static void ClickOnSortBy() => DriverForChrome.GetDriver().FindElement(MainPageLoc.productSortByForClick).Click();
+        internal static void ClickOnSortBy() => DriverForBrowser.GetDriver().FindElement(MainPageLoc.productSortByForClick).Click();
 
         internal static void SelectOptionInDropDownList(string selectedOption)
         {
-            DriverForChrome.SelectElementInDropDown(MainPageLoc.optionsForSelectInDropDown, selectedOption);
+            DriverForBrowser.SelectElementInDropDown(MainPageLoc.optionsForSelectInDropDown, selectedOption);
         }
         internal static bool CorrectSortByPrice()
         {
             var prisesForElements = new List<int>();
-            var elementsAfterDiscont = DriverForChrome.GetDriver().FindElements(MainPageLoc.oldPricesForProducts);
-            var originPrices = DriverForChrome.GetDriver().FindElements(MainPageLoc.currentPrices);
+            var elementsAfterDiscont = DriverForBrowser.GetDriver().FindElements(MainPageLoc.oldPricesForProducts);
+            var originPrices = DriverForBrowser.GetDriver().FindElements(MainPageLoc.currentPrices);
             for (int i = 0; i < 2; i++)
             {
                 if (elementsAfterDiscont[i].Text != null)
@@ -47,28 +47,28 @@ namespace SpecFlowProject1.Support.POM.Methods
         }
         internal static string SavedNameOfProduct()
         {
-            ProductsParameters.Name = DriverForChrome.GetDriver().FindElement(MainPageLoc.nameOfSelectedProduct).GetAttribute("title");
+            ProductsParameters.Name = DriverForBrowser.GetDriver().FindElement(MainPageLoc.nameOfSelectedProduct).GetAttribute("title");
             return ProductsParameters.Name;
         }
         internal static string SevedPriceOfProduct()
         {
-            ProductsParameters.Price = BaseData.RemoveNonNumbers(DriverForChrome.GetDriver().FindElement(MainPageLoc.priceForSelectedProduct).Text);
+            ProductsParameters.Price = BaseData.RemoveNonNumbers(DriverForBrowser.GetDriver().FindElement(MainPageLoc.priceForSelectedProduct).Text);
             return (string)ProductsParameters.Price;
         }
         internal static void ClickAddToCart()
         {
-            DriverForChrome.MoveToElement(MainPageLoc.productImage);
-            DriverForChrome.GetDriver().FindElement(MainPageLoc.addToCartButton).Click();
+            DriverForBrowser.MoveToElement(MainPageLoc.productImage);
+            DriverForBrowser.GetDriver().FindElement(MainPageLoc.addToCartButton).Click();
         }
         internal static void OpenCart()
         {
-            DriverForChrome.MoveToElement(MainPageLoc.openCartButton);
-            DriverForChrome.GetDriver().FindElement(MainPageLoc.openCartButton).Click(); 
+            DriverForBrowser.MoveToElement(MainPageLoc.openCartButton);
+            DriverForBrowser.GetDriver().FindElement(MainPageLoc.openCartButton).Click(); 
         }
         internal static void CLickOnMoreButton()
         {
-            DriverForChrome.MoveToElement(MainPageLoc.productImage);
-            DriverForChrome.GetDriver().FindElement(MainPageLoc.OpenMoreButton).Click();
+            DriverForBrowser.MoveToElement(MainPageLoc.productImage);
+            DriverForBrowser.GetDriver().FindElement(MainPageLoc.OpenMoreButton).Click();
         }
     }
 }

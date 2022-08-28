@@ -174,7 +174,7 @@ namespace SpecFlowProject1.StepDefinitions
         [Then(@"In busket list only '([^']*)' left")]
         public void ThenInBusketListOnlyLeft(string expected)
         {
-            DriverForChrome.RefreshPage();
+            DriverForBrowser.RefreshPage();
             var actual = CartPageMeth.AddedToCartProductName(1);
             Assert.IsTrue(expected.Contains(actual));
         }
