@@ -126,10 +126,10 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 this.ScenarioStart();
 #line 14
- testRunner.When("User search for \'SUMMER\' with search field", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.Given("A search has been made for \'SUMMER\' with search field", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 15
- testRunner.And("User select option \'Price: Highest first\' in dropdown list", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.When("User select option \'Price: Highest first\' in dropdown list", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 16
  testRunner.Then("All element sorted with selected option", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
@@ -160,7 +160,7 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 this.ScenarioStart();
 #line 20
- testRunner.Given("User search for \'SUMMER\' with search field", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("A search has been made for \'SUMMER\' with search field", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 21
  testRunner.And("User select option \'Price: Highest first\' in dropdown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
@@ -168,9 +168,11 @@ this.ScenarioInitialize(scenarioInfo);
 #line 22
  testRunner.When("User add \'first product\' to busket", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
+                TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Name",
+                            "Price"});
 #line 23
- testRunner.Then("Verify added to busket correspond remembered name and price of \'selected product\'" +
-                        "", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("The following items are saved in the basket", ((string)(null)), table1, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -187,7 +189,7 @@ this.ScenarioInitialize(scenarioInfo);
                     "chrome"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Check if adding to basket with specific parameters work correctly", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 26
+#line 27
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -197,18 +199,18 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-                TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
                             "Quantity",
                             "Size",
                             "Color"});
-                table1.AddRow(new string[] {
+                table2.AddRow(new string[] {
                             "3",
                             "L",
                             "white"});
-#line 27
- testRunner.When("User search for \'Blouse\' and add to cart first found product with details", ((string)(null)), table1, "When ");
+#line 28
+ testRunner.When("User search for \'Blouse\' and add to cart first found product with details", ((string)(null)), table2, "When ");
 #line hidden
-#line 30
+#line 31
  testRunner.Then("Message \'Product successfully added to your shopping cart\' displayed in modal win" +
                         "dow", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
@@ -227,7 +229,7 @@ this.ScenarioInitialize(scenarioInfo);
                     "chrome"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Check if in busket correct displayed all added products", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 33
+#line 34
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -237,32 +239,53 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-                TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
-                            "Quantity",
-                            "Size",
-                            "Color"});
-                table2.AddRow(new string[] {
-                            "3",
-                            "L",
-                            "White"});
-#line 34
- testRunner.Given("User search for \'Blouse\' and add to cart first founded product with details", ((string)(null)), table2, "Given ");
-#line hidden
                 TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
                             "Quantity",
                             "Size",
                             "Color"});
                 table3.AddRow(new string[] {
+                            "3",
+                            "L",
+                            "White"});
+#line 35
+ testRunner.Given("A search has been made for \'Blouse\' and add to cart first founded product with de" +
+                        "tails", ((string)(null)), table3, "Given ");
+#line hidden
+                TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Quantity",
+                            "Size",
+                            "Color"});
+                table4.AddRow(new string[] {
                             "5",
                             "M",
                             "Orange"});
-#line 37
+#line 38
  testRunner.When("User search for \'Printed summer dress\', add to cart first found product with deta" +
-                        "ils and open basket", ((string)(null)), table3, "When ");
+                        "ils and open basket", ((string)(null)), table4, "When ");
 #line hidden
-#line 40
- testRunner.Then("In cart for 2 added products displayed correct \'Name\',\'Color\',\'Size\', \'Unit price" +
-                        "\', \'Quantity of goods\', \'Total price\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+                TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Name",
+                            "Color",
+                            "Size",
+                            "Unit price",
+                            "Quantity",
+                            "Total price"});
+                table5.AddRow(new string[] {
+                            "Blouse",
+                            "White",
+                            "L",
+                            "27.00",
+                            "3",
+                            "81.00"});
+                table5.AddRow(new string[] {
+                            "Printed summer dress",
+                            "Orange",
+                            "M",
+                            "28.98",
+                            "5",
+                            "144.90"});
+#line 41
+ testRunner.Then("Correct information about added products", ((string)(null)), table5, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -279,7 +302,7 @@ this.ScenarioInitialize(scenarioInfo);
                     "chrome"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Check if delete from busket function work correctly", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 43
+#line 46
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -289,33 +312,34 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-                TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
                             "Quantity",
                             "Size",
                             "Color"});
-                table4.AddRow(new string[] {
+                table6.AddRow(new string[] {
                             "3",
                             "L",
                             "White"});
-#line 44
- testRunner.Given("User search for \'Blouse\' and add to cart first founded product with details", ((string)(null)), table4, "Given ");
+#line 47
+ testRunner.Given("A search has been made for \'Blouse\' and add to cart first founded product with de" +
+                        "tails", ((string)(null)), table6, "Given ");
 #line hidden
-                TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
                             "Quantity",
                             "Size",
                             "Color"});
-                table5.AddRow(new string[] {
+                table7.AddRow(new string[] {
                             "5",
                             "M",
                             "Orange"});
-#line 47
- testRunner.And("User search for \'Printed summer dress\' and add to cart first founded product with" +
-                        " details", ((string)(null)), table5, "And ");
-#line hidden
 #line 50
+ testRunner.And("A search has been made for \'Printed summer dress\' and add to cart first founded p" +
+                        "roduct with details", ((string)(null)), table7, "And ");
+#line hidden
+#line 53
  testRunner.When("User delete \'Printed summer dress\' from basket", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 51
+#line 54
  testRunner.Then("In busket list only \'Blouse\' left", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }

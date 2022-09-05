@@ -26,10 +26,8 @@ namespace SpecFlowProject1.Support.POM.Methods
         }
         internal static void ClickOnSortBy() => DriverForBrowser.GetDriver().FindElement(MainPageLoc.productSortByForClick).Click();
 
-        internal static void SelectOptionInDropDownList(string selectedOption)
-        {
+        internal static void SelectOptionInDropDownList(string selectedOption) => 
             DriverForBrowser.SelectElementInDropDown(MainPageLoc.optionsForSelectInDropDown, selectedOption);
-        }
         internal static bool CorrectSortByPrice()
         {
             var prisesForElements = new List<int>();
@@ -38,10 +36,13 @@ namespace SpecFlowProject1.Support.POM.Methods
             for (int i = 0; i < 2; i++)
             {
                 if (elementsAfterDiscont[i].Text != null)
+                {
                     prisesForElements.Add(Int32.Parse(BaseData.RemoveNonNumbers(elementsAfterDiscont[i].Text)));
+                }
                 else
+                {
                     prisesForElements.Add(Int32.Parse(BaseData.RemoveNonNumbers(originPrices[i].Text)));
-                prisesForElements.Add(1);
+                }
             }
             return OrderOfPrices.IsCorrectSort(prisesForElements);
         }

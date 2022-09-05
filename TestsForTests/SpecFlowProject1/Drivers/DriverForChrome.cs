@@ -8,7 +8,7 @@ using OpenQA.Selenium.Support.UI;
 namespace SpecFlowProject1.Drivers
 {
     internal static class DriverForBrowser
-    {   
+    {
         private static Actions action;
         private static IWebDriver _driver;
         private static SelectElement dropDown;
@@ -22,8 +22,9 @@ namespace SpecFlowProject1.Drivers
         internal static IWebDriver GetDriver()
         {
             if (_driver == null)
+            {
                 CreateDriver();
-
+            }
             return _driver;
         }
         internal static void CleanDriver()
@@ -38,7 +39,6 @@ namespace SpecFlowProject1.Drivers
                 _driver.Manage().Cookies.DeleteAllCookies();
                 _driver.Close();
             }
-
             // Switch to empty tab.
             _driver.SwitchTo().Window(_driver.WindowHandles[0]);
         }

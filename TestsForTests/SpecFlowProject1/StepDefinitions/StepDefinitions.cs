@@ -3,7 +3,6 @@ using NUnit.Framework;
 using TechTalk.SpecFlow.Assist;
 using SpecFlowProject1.Support.DataForTests.Models;
 using SpecFlowProject1.Support.DataForTests;
-using System.Threading;
 using SpecFlowProject1.Drivers;
 
 namespace SpecFlowProject1.StepDefinitions
@@ -11,7 +10,7 @@ namespace SpecFlowProject1.StepDefinitions
     [Binding]
     public class StepDefinitions
     {
-        [Given(@"User search for '([^']*)' with search field")]
+        [Given(@"A search has been made for '([^']*)' with search field")]
         [When(@"User search for '([^']*)' with search field")]
         public void WhenUserSearchForWithSearchField(string searchWord)
         {
@@ -40,23 +39,23 @@ namespace SpecFlowProject1.StepDefinitions
             MainPageMeth.CorrectSortByPrice();
         }
 
-
         [When(@"User add '([^']*)' to busket")]
         public void WhenUserAddToBusket(string o)
         {
             MainPageMeth.ClickAddToCart();
         }
 
-        [Then(@"Verify added to busket correspond remembered name and price of '([^']*)'")]
-        public void ThenVerifyAddedToBusketCorrespondRememberedNameAndPriceOf(string p0)
+        [Then(@"The following items are saved in the basket")]
+        public void ThenTheFollowingItemsAreSavedInTheBasket(Table table)
         {
-            var expectedName = MainPageMeth.SavedNameOfProduct();
-            var expectedPrice = MainPageMeth.SevedPriceOfProduct();
+            var expectedData = table.CreateInstance<Parameters>();
+            expectedData.Name = MainPageMeth.SavedNameOfProduct();
+            expectedData.Price = MainPageMeth.SevedPriceOfProduct();
             ModalWindowMeth.ClickOnMoveToCartButton();
             var actualName = CartPageMeth.AddedToCartProductName(1);
             var actualPrice = CartPageMeth.AddedToCartProductPrice(1);
-            Assert.IsTrue(actualName.Contains(expectedName));
-            Assert.IsTrue(expectedPrice.Contains(actualPrice));
+            Assert.IsTrue(actualName.Contains(expectedData.Name));
+            Assert.IsTrue(expectedData.Price.Contains(actualPrice));
         }
 
         [When(@"User select in details for '([^']*)' and add  to cart")]
@@ -64,9 +63,7 @@ namespace SpecFlowProject1.StepDefinitions
         {
             MainPageMeth.CLickOnMoreButton();
             var list = table.CreateInstance<Parameters>();
-            ProductDetailsMeth.EnterQuantityWithKeyboard(list.Quantity);
-            ProductDetailsMeth.SelectSize(list.Size);
-            ProductDetailsMeth.SelectColor(list.Color);
+            ProductDetailsMeth.InputDetailsForProduct(list.Quantity, list.Size, list.Color);
             ProductDetailsMeth.AddToCart();
         }
 
@@ -78,7 +75,7 @@ namespace SpecFlowProject1.StepDefinitions
             Assert.IsTrue(expectedRes.Contains(actualMess));
         }
 
-        [Given(@"User search for '([^']*)' and add to cart first founded product with details")]
+        [Given(@"A search has been made for '([^']*)' and add to cart first founded product with details")]
         [When(@"User search for '([^']*)' and add to cart '([^']*)' with details")]
         [When(@"User search for '([^']*)' and add to cart first found product with details")]
         public void WhenUserSearchForAndAddToCartWithDetails(string searchWord, Table table)
@@ -87,18 +84,17 @@ namespace SpecFlowProject1.StepDefinitions
             MainPageMeth.InputInSearchField(searchWord);
             MainPageMeth.ConfirmSearch();
             MainPageMeth.CLickOnMoreButton();
-            ProductDetailsMeth.EnterQuantityWithKeyboard(list.Quantity);
-            ProductDetailsMeth.SelectSize(list.Size);
-            ProductDetailsMeth.SelectColor(list.Color);
-            ScenarioContext.Current["Name of first product"] = ProductDetailsMeth.NameOfAddedProduct();
-            ScenarioContext.Current["Price for first product"] = ProductDetailsMeth.PriceOfAddedProduct();
-            ScenarioContext.Current["Quantity of first product"] = ProductDetailsMeth.QuantityOfAddedProduct();
-            ScenarioContext.Current["Size of first product"] = ProductDetailsMeth.SizeOfAddedProduct();
-            ScenarioContext.Current["Color of first product"] = ProductDetailsMeth.ColorOfAddedProduct();
+            ProductDetailsMeth.InputDetailsForProduct(list.Quantity, list.Size, list.Color);
+            /*ScenarioContext.Current.Add(KeysForScenCont.nameOfFirstProduct, ProductDetailsMeth.NameOfAddedProduct());
+            ScenarioContext.Current.Add(KeysForScenCont.priceOfFirstProduct, ProductDetailsMeth.PriceOfAddedProduct());
+            ScenarioContext.Current.Add(KeysForScenCont.quantityOfFirstProduct, ProductDetailsMeth.QuantityOfAddedProduct());
+            ScenarioContext.Current.Add(KeysForScenCont.sizeOfFirstProduct, ProductDetailsMeth.SizeOfAddedProduct());
+            ScenarioContext.Current.Add(KeysForScenCont.colorOfFirstProduct, ProductDetailsMeth.ColorOfAddedProduct());*/
             ProductDetailsMeth.AddToCart();
-            ScenarioContext.Current["Total price of first product"] = ModalWindowMeth.TotalPriceOfAddedProduct();
+           // ScenarioContext.Current.Add(KeysForScenCont.totalPriceOfFirstProduct, ModalWindowMeth.TotalPriceOfAddedProduct());
             ModalWindowMeth.CLickCloseModalWindow();
         }
+
         [When(@"User search for '([^']*)', add to cart first found product with details and open basket")]
         public void WhenUserSearchForAddToCartFirstFoundProductWithDetailsAndOpenBasket(string searchWord, Table table)
         {
@@ -106,30 +102,27 @@ namespace SpecFlowProject1.StepDefinitions
             MainPageMeth.InputInSearchField(searchWord);
             MainPageMeth.ConfirmSearch();
             MainPageMeth.CLickOnMoreButton();
-            ProductDetailsMeth.EnterQuantityWithKeyboard(list.Quantity);
-            ProductDetailsMeth.SelectSize(list.Size);
-            ProductDetailsMeth.SelectColor(list.Color);
-            ScenarioContext.Current["Name of second product"] = ProductDetailsMeth.NameOfAddedProduct();
-            ScenarioContext.Current["Price for second product"] = ProductDetailsMeth.PriceOfAddedProduct();
-            ScenarioContext.Current["Quantity of second product"] = ProductDetailsMeth.QuantityOfAddedProduct();
-            ScenarioContext.Current["Size of second product"] = ProductDetailsMeth.SizeOfAddedProduct();
-            ScenarioContext.Current["Color of second product"] = ProductDetailsMeth.ColorOfAddedProduct();
+            ProductDetailsMeth.InputDetailsForProduct(list.Quantity, list.Size, list.Color);
             ProductDetailsMeth.AddToCart();
-            ScenarioContext.Current["Total price of second product"] = ModalWindowMeth.TotalPriceOfAddedProduct();
             ModalWindowMeth.ClickOnMoveToCartButton();
         }
 
+        [Then(@"Correct information about added products")]
+        public void ThenCorrectInformationAboutAddedProducts(Table table)
+        {
+            var expectedData = table.CreateInstance<ProductParamInCart>();
+            var actualData = CartPageMeth.GetActualParameters();
+            Assert.IsTrue(expectedData.Names.Equals(actualData.Names));
+            Assert.IsTrue(expectedData.Pricies.Equals(actualData.Pricies));
+            Assert.IsTrue(expectedData.Colors.Equals(actualData.Colors));
+            Assert.IsTrue(expectedData.Quantities.Equals(actualData.Quantities));
+            Assert.IsTrue(expectedData.Size.Equals(actualData.Size));
+            Assert.IsTrue(expectedData.TotalPrice.Equals(actualData.TotalPrice));
+        }
 
         [Then(@"In cart for (.*) added products displayed correct '([^']*)','([^']*)','([^']*)', '(.*)', '(.*)', '(.*)'")]
         public void ThenInCartForAddedProductsDispyaedCorrect(int p0, string expectedName, string expectedSize, string expectedColor, string expUnitPrice, string expQuantity, string expTotalPrice)
         {
-            //for first
-            expectedName = (string)ScenarioContext.Current["Name of first product"];
-            expectedSize = (string)ScenarioContext.Current["Size of first product"];
-            expectedColor = (string)ScenarioContext.Current["Color of first product"];
-            expUnitPrice = (string)ScenarioContext.Current["Price for first product"];
-            expQuantity = (string)ScenarioContext.Current["Quantity of first product"];
-            expTotalPrice = (string)ScenarioContext.Current["Total price of first product"];
             var actualName = CartPageMeth.AddedToCartProductName(2);
             var actualPrice = CartPageMeth.AddedToCartProductPrice(2);
             var actualSize = CartPageMeth.AddedToCartProductSize(2);
@@ -161,7 +154,6 @@ namespace SpecFlowProject1.StepDefinitions
             Assert.AreEqual(expectedColor, actualColor);
             Assert.AreEqual(expQuantity, actualQuantity);
             Assert.AreEqual(expTotalPrice, actualTotalPrice);
-
         }
 
         [When(@"User delete '([^']*)' from basket")]

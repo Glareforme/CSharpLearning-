@@ -8,8 +8,14 @@ namespace SpecFlowProject1.Support.DataForTests
     {
         static Regex regex = new Regex("Printed Summer Dress");
         internal const string baseUrl = "http://automationpractice.com/";
-        public static string RemoveNonWords(string key) { return Regex.Replace(key, @"\W", ""); }
-        public static string RemoveNonNumbers(string key) { return Regex.Replace(key, @"\D*", ""); }
+        public static string RemoveNonWords(string key)
+        { 
+            return Regex.Replace(key, @"\W", ""); 
+        }
+        public static string RemoveNonNumbers(string key)
+        {
+            return Regex.Replace(key, @"\D*", "");
+        }
         public static string ExtractColorOnCartPage(string key)
         {
             string temp = Regex.Replace(key, @"(\S+[\s][:]\s)*[,]\s.*", "");

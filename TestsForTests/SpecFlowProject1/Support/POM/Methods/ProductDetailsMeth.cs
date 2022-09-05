@@ -8,22 +8,32 @@ namespace SpecFlowProject1.Support.POM.Methods
 {
     internal class ProductDetailsMeth
     {
-        internal static void EnterQuantityWithKeyboard(string quantry)
+        internal static void InputDetailsForProduct(string quantry, string size, string color)
+        {
+            EnterQuantityWithKeyboard(quantry);
+            SelectSize(size);
+            SelectColor(color);
+        }
+        private static void EnterQuantityWithKeyboard(string quantry)
         {
             DriverForBrowser.GetDriver().FindElement(ProductDetailsLoc.quantryField).Clear();
             DriverForBrowser.GetDriver().FindElement(ProductDetailsLoc.quantryField).SendKeys(quantry);
         }
-        internal static void SelectSize(string selectedSize) => DriverForBrowser.SelectElementInDropDown(ProductDetailsLoc.selectSizeDropDown, selectedSize);
-        internal static void SelectColor(string color)
+        private static void SelectSize(string selectedSize) => DriverForBrowser.SelectElementInDropDown(ProductDetailsLoc.selectSizeDropDown, selectedSize);
+        private static void SelectColor(string color)
         {
             switch (color)
             {
                 case ("Orange"):
-                    DriverForBrowser.GetDriver().FindElement(ProductDetailsLoc.oragneSelectedColor).Click();
-                    break;
+                    {
+                        DriverForBrowser.GetDriver().FindElement(ProductDetailsLoc.oragneSelectedColor).Click();
+                        break;
+                    }
                 case ("Write"):
-                    DriverForBrowser.GetDriver().FindElement(ProductDetailsLoc.whiteSelectedColor).Click();
-                    break;
+                    {
+                        DriverForBrowser.GetDriver().FindElement(ProductDetailsLoc.whiteSelectedColor).Click();
+                        break;
+                    }
             }
         }
         internal static void AddToCart() => DriverForBrowser.GetDriver()

@@ -4,7 +4,7 @@
     {
         internal static bool IsCorrectSort(List<int> currPrices) 
         {
-            if (currPrices[0] > currPrices[1] | currPrices[1] > currPrices[2])
+            if (currPrices[0] > currPrices[1])
                 return true;
             return false;
         }

@@ -2,6 +2,9 @@
 {
     internal static class ProductsParameters
     {
+        /// <summary>
+        /// Model. Products parameters on pages
+        /// </summary>
         internal static string? Name { get; set; }
         internal static object? Price { get; set; }
         internal static string? Color { get; set; }
