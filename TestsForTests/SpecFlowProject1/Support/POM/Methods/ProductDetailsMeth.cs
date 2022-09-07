@@ -38,34 +38,5 @@ namespace SpecFlowProject1.Support.POM.Methods
         }
         internal static void AddToCart() => DriverForBrowser.GetDriver()
             .FindElement(ProductDetailsLoc.addToCartButton).Click();
-        internal static string NameOfAddedProduct()
-        {
-            ProductsParameters.Name = DriverForBrowser.GetDriver().FindElement(ProductDetailsLoc.productName).Text;
-            return ProductsParameters.Name;
-        }
-        internal static string PriceOfAddedProduct()
-        {
-            ProductsParameters.Price = BaseData.RemoveNonNumbers(DriverForBrowser.GetDriver()
-                .FindElement(ProductDetailsLoc.priceProduct).Text);
-            return  (string)ProductsParameters.Price;
-        }
-        internal static string QuantityOfAddedProduct()
-        {
-            ProductsParameters.QuantityOfGoods = BaseData.RemoveNonNumbers(DriverForBrowser.GetDriver()
-                .FindElement(ProductDetailsLoc.quantityOfProduct).GetAttribute("value"));
-            return (string)ProductsParameters.QuantityOfGoods;
-        }
-        internal static string ColorOfAddedProduct()
-        {
-            ProductsParameters.Color = DriverForBrowser.GetDriver()
-                .FindElement(ProductDetailsLoc.getSelectedColor).GetAttribute("title");
-            return ProductsParameters.Color;
-        }
-        internal static string SizeOfAddedProduct()
-        {
-            ProductsParameters.Size = DriverForBrowser.GetDriver()
-                .FindElement(ProductDetailsLoc.getSelectedSize).Text;
-            return ProductsParameters.Size;
-        }
     }
 }

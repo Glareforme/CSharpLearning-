@@ -17,12 +17,5 @@ namespace SpecFlowProject1.Support.POM.Methods
             .FindElement(ModalWindowLoc.moveToCart).Click();
         internal static void CLickCloseModalWindow() => DriverForBrowser.GetDriver()
             .FindElement(ModalWindowLoc.closeModalWindow).Click();
-        internal static string TotalPriceOfAddedProduct()
-        {
-            DriverForBrowser.WaitForElement(ModalWindowLoc.totalPriceOfProduct);
-            ProductsParameters.TotalPrice = BaseData.RemoveNonNumbers(DriverForBrowser.GetDriver()
-                .FindElement(ModalWindowLoc.totalPriceOfProduct).Text);
-            return (string)ProductsParameters.TotalPrice;
-        }
     }
 }

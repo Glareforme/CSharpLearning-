@@ -2,7 +2,6 @@ using SpecFlowProject1.Support.POM.Methods;
 using NUnit.Framework;
 using TechTalk.SpecFlow.Assist;
 using SpecFlowProject1.Support.DataForTests.Models;
-using SpecFlowProject1.Support.DataForTests;
 using SpecFlowProject1.Drivers;
 
 namespace SpecFlowProject1.StepDefinitions
@@ -85,13 +84,7 @@ namespace SpecFlowProject1.StepDefinitions
             MainPageMeth.ConfirmSearch();
             MainPageMeth.CLickOnMoreButton();
             ProductDetailsMeth.InputDetailsForProduct(list.Quantity, list.Size, list.Color);
-            /*ScenarioContext.Current.Add(KeysForScenCont.nameOfFirstProduct, ProductDetailsMeth.NameOfAddedProduct());
-            ScenarioContext.Current.Add(KeysForScenCont.priceOfFirstProduct, ProductDetailsMeth.PriceOfAddedProduct());
-            ScenarioContext.Current.Add(KeysForScenCont.quantityOfFirstProduct, ProductDetailsMeth.QuantityOfAddedProduct());
-            ScenarioContext.Current.Add(KeysForScenCont.sizeOfFirstProduct, ProductDetailsMeth.SizeOfAddedProduct());
-            ScenarioContext.Current.Add(KeysForScenCont.colorOfFirstProduct, ProductDetailsMeth.ColorOfAddedProduct());*/
             ProductDetailsMeth.AddToCart();
-           // ScenarioContext.Current.Add(KeysForScenCont.totalPriceOfFirstProduct, ModalWindowMeth.TotalPriceOfAddedProduct());
             ModalWindowMeth.CLickCloseModalWindow();
         }
 
@@ -118,42 +111,6 @@ namespace SpecFlowProject1.StepDefinitions
             Assert.IsTrue(expectedData.Quantities.Equals(actualData.Quantities));
             Assert.IsTrue(expectedData.Size.Equals(actualData.Size));
             Assert.IsTrue(expectedData.TotalPrice.Equals(actualData.TotalPrice));
-        }
-
-        [Then(@"In cart for (.*) added products displayed correct '([^']*)','([^']*)','([^']*)', '(.*)', '(.*)', '(.*)'")]
-        public void ThenInCartForAddedProductsDispyaedCorrect(int p0, string expectedName, string expectedSize, string expectedColor, string expUnitPrice, string expQuantity, string expTotalPrice)
-        {
-            var actualName = CartPageMeth.AddedToCartProductName(2);
-            var actualPrice = CartPageMeth.AddedToCartProductPrice(2);
-            var actualSize = CartPageMeth.AddedToCartProductSize(2);
-            var actualColor = CartPageMeth.AddedToCartProductColor(2);
-            var actualQuantity = CartPageMeth.AddedToCartProductQuantity(2);
-            var actualTotalPrice = CartPageMeth.AddedToCartProductTotalPrice(2);
-            Assert.IsTrue(expectedName.Contains(actualName));
-            Assert.IsTrue(expUnitPrice.Contains(actualPrice));
-            Assert.AreEqual(expectedSize, actualSize);
-            Assert.AreEqual(expectedColor, actualColor);
-            Assert.AreEqual(expQuantity, actualQuantity);
-            Assert.AreEqual(expTotalPrice, actualTotalPrice);
-            //for second 
-            expectedName = (string)ScenarioContext.Current["Name of second product"];
-            expectedSize = (string)ScenarioContext.Current["Size of second product"];
-            expectedColor = (string)ScenarioContext.Current["Color of second product"];
-            expUnitPrice = (string)ScenarioContext.Current["Price for second product"];
-            expQuantity = (string)ScenarioContext.Current["Quantity of second product"];
-            expTotalPrice = (string)ScenarioContext.Current["Total price of second product"];
-            actualName = CartPageMeth.AddedToCartProductName(1);
-            actualPrice = CartPageMeth.AddedToCartProductPrice(1);
-            actualSize = CartPageMeth.AddedToCartProductSize(1);
-            actualColor = CartPageMeth.AddedToCartProductColor(1);
-            actualQuantity = CartPageMeth.AddedToCartProductQuantity(1);
-            actualTotalPrice = CartPageMeth.AddedToCartProductTotalPrice(1);
-            Assert.IsTrue(expectedName.Contains(actualName));
-            Assert.IsTrue(expUnitPrice.Contains(actualPrice));
-            Assert.AreEqual(expectedSize, actualSize);
-            Assert.AreEqual(expectedColor, actualColor);
-            Assert.AreEqual(expQuantity, actualQuantity);
-            Assert.AreEqual(expTotalPrice, actualTotalPrice);
         }
 
         [When(@"User delete '([^']*)' from basket")]

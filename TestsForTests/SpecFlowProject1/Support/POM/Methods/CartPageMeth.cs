@@ -18,6 +18,7 @@ namespace SpecFlowProject1.Support.POM.Methods
             param.TotalPrice = AddedToCartProductsTotalPrice();
             return param;
         }
+
         private static List<string> AddedToCartProductName()
         {
             var parameter = new ProductParamInCart();
@@ -28,6 +29,7 @@ namespace SpecFlowProject1.Support.POM.Methods
             }
             return parameter.Names;
         }
+
         private static List<string> AddedToCartProductPrice()
         {
             var parameter = new ProductParamInCart();
@@ -37,6 +39,7 @@ namespace SpecFlowProject1.Support.POM.Methods
             parameter.Pricies.Add(temp2.Text);
             return parameter.Pricies;
         }
+
         private static List<string> AddedToCartProductSize()
         {
             var parameter = new ProductParamInCart();
@@ -47,6 +50,7 @@ namespace SpecFlowProject1.Support.POM.Methods
             }
             return parameter.Size;
         }
+
         private static List<string> AddedToCartProductsColor()
         {
             var par = new ProductParamInCart();
@@ -57,6 +61,7 @@ namespace SpecFlowProject1.Support.POM.Methods
             }
             return par.Colors;
         }
+
         private static List<string> AddedToCartProductsQuantities()
         {
             var par = new ProductParamInCart();
@@ -67,6 +72,7 @@ namespace SpecFlowProject1.Support.POM.Methods
             }
             return par.Quantities;
         }
+
         private static List<string> AddedToCartProductsTotalPrice()
         {
             var par = new ProductParamInCart();
@@ -77,6 +83,7 @@ namespace SpecFlowProject1.Support.POM.Methods
             }
             return par.TotalPrice;
         }
+
         internal static string AddedToCartProductName(int select)
         {
             switch (select)
@@ -98,6 +105,7 @@ namespace SpecFlowProject1.Support.POM.Methods
             }
             return null;
         }
+
         internal static string AddedToCartProductPrice(int select)
         {
             switch (select)
@@ -117,6 +125,7 @@ namespace SpecFlowProject1.Support.POM.Methods
             }
             return null;
         }
+
         internal static string AddedToCartProductSize(int select)
         {
             switch (select)
@@ -136,6 +145,7 @@ namespace SpecFlowProject1.Support.POM.Methods
             }
             return null;
         }
+
         internal static string AddedToCartProductColor(int select)
         {
             switch (select)
@@ -155,44 +165,7 @@ namespace SpecFlowProject1.Support.POM.Methods
             }
             return null;
         }
-        internal static string AddedToCartProductQuantity(int select)
-        {
-            switch (select)
-            {
-                case 2:
-                    {
-                        ProductsParameters.QuantityOfGoods = DriverForBrowser.GetDriver().FindElement(CartPageLoc.quantityOfFirstProduct).GetAttribute("value");
-                        return (string)ProductsParameters.QuantityOfGoods;
-                        break;
-                    }
-                case 1:
-                    {
-                        ProductsParameters.QuantityOfGoods = DriverForBrowser.GetDriver().FindElement(CartPageLoc.quantityOfSecondProduct).GetAttribute("value");
-                        return (string)ProductsParameters.QuantityOfGoods;
-                        break;
-                    }
-            }
-            return null;
-        }
-        internal static string AddedToCartProductTotalPrice(int select)
-        {
-            switch (select)
-            {
-                case 2:
-                    {
-                        ProductsParameters.TotalPrice = BaseData.RemoveNonNumbers(DriverForBrowser.GetDriver().FindElement(CartPageLoc.totalPriceOfFirstProduct).Text);
-                        return (string)ProductsParameters.TotalPrice;
-                        break;
-                    }
-                case 1:
-                    {
-                        ProductsParameters.TotalPrice = BaseData.RemoveNonNumbers(DriverForBrowser.GetDriver().FindElement(CartPageLoc.totalPriceOfSecondProduct).Text);
-                        return (string)ProductsParameters.TotalPrice;
-                        break;
-                    }
-            }
-            return null;
-        }
+
         internal static void DeleteProductFromCart()
         {
             DriverForBrowser.MoveToElement(CartPageLoc.deleteProductButton);
