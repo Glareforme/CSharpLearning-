@@ -15,5 +15,33 @@ namespace APITest.Tests
 
             response.Should().NotBeNull("Response is null");
         }
+        [Test]
+        public async Task CheckThanEmployeeControllerReturnCorrectDataResponce()
+        {
+        }
+        [Test]
+        public async Task CheckIfYouCanCreateNewRecordInBase()
+        {
+        }
+        [Test]
+        public async Task CheckIfYouCanUpdateExistingRecondInBase()
+        {
+
+        }
+        [Test]
+        public async Task CheckIfYouCanDeleteExistingRecondFromBase()
+        {
+
+        }
+        [Test]
+        public async Task CheckIfIdIncorrectFormatReturn400Status()
+        {
+
+        }
+        [Test]
+        public async Task CheckIfEnterDataInIncorrectFormatReturn400status()
+        {
+
+        }
     }
 }

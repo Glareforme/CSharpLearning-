@@ -15,5 +15,23 @@ namespace APITest.Controllers
             var request = new RestRequest(resource, Method.GET);
             return await this.RestClient.GetAsync<object>(request);
         }
+        protected async Task<object> PostAsync(string resource, object body)
+        {
+            var request = new RestRequest(resource, Method.POST);
+            request.AddJsonBody(body);
+            return await this.RestClient.PostAsync<object>(request);
+        }
+        protected async Task<object> PutAsync(string resource, object body)
+        {
+            var request = new RestRequest(resource, Method.PUT);
+            request.AddBody(body);
+            return await this.RestClient.PutAsync<object>(request);
+        }
+        protected async Task<object> DeleteAsync(string resource, object body)
+        {
+            var request = new RestRequest(resource, Method.DELETE);
+            request.AddJsonBody(body);
+            return await this.RestClient.DeleteAsync<object>(request);
+        }
     }
 }
