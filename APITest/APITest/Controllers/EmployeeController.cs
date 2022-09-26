@@ -1,8 +1,6 @@
-﻿using RestSharp;
-using System.Text.Json;
+﻿using System.Text.Json;
 using System.Threading.Tasks;
 using APITest.Models;
-using System.Collections.Generic;
 using APITest.Constants;
 
 namespace APITest.Controllers

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace APITest.Constants
 {
-    internal class EmployeeUpdateConst
+    public class EmployeeUpdateConst
     {
         public const string name = "UpdatedName";
         public const int salary = 1222;

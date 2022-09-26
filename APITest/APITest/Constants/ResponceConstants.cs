@@ -4,8 +4,11 @@ using System.Text;
 
 namespace APITest.Constants
 {
-    internal class ResponceConstants
+    public class ResponceConstants
     {
+        public const string GetMethod = "Get";
+        public const string PostMethod = "Post";
+        public const string PutMethod = "Put";
         public const string Status = "success";
         public const string ErrorStatus = "error";
         public const string ErrorMassageNotFound = "Not found record";

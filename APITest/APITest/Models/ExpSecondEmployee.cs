@@ -2,7 +2,7 @@
 
 namespace APITest.Models
 {
-    internal class ExpSecondEmployee : EmployeeModel
+    public class ExpSecondEmployee : EmployeeModel
     {
         public const int Id = 21;
         public const string Name = "Jenette Caldwell";
