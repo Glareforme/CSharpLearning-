@@ -4,15 +4,16 @@ using System.Text.Json;
 
 namespace EmployeeAPITest.Support.AssertsForTests
 {
-    internal class GetAssert
+    internal class PostAssert
     {
-        public bool IsGetRecordByIdCorrectResponce(int userId, string actualResponce)
+        WorkWithPostResponce workWithPostResponce = new WorkWithPostResponce();
+        public bool IsCreateRecordInDBCorrectResponce(string actualResponce)
         {
-            var expectedResult = WorkWithGetResponce.ExpectedResponceModelForSuccessfullGetByIdRequest(userId);
+            var expectedResult = workWithPostResponce.ExpectedResponceModelForSuccessfullCreateIntDB();
             var actualResult = JsonSerializer.Deserialize<EmployeeResponceModel>(actualResponce);
             if (expectedResult.status.Equals(actualResult.status) && expectedResult.message.Equals(actualResult.message))
             {
-              return true;
+                return true;
             }
             return false;
         }

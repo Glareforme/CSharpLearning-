@@ -15,14 +15,16 @@ namespace EmployeeAPITest.Drivers
             return await responce.Content.ReadAsStringAsync();
         }
 
-        protected async Task<string> PostAsync(string endpoint, object body)
+        protected async Task<string> PostAsync(string endpoint, string body)
         {
-            var responce = await Client.PostAsync(BaseUrl + endpoint, (HttpContent?)body);
+            var requestBody = new StringContent(body);
+            var responce = await Client.PostAsync(BaseUrl + endpoint, requestBody);
             return await responce.Content.ReadAsStringAsync();
         }
-        protected async Task<string> PutAsync(string endpoint, object body)
+        protected async Task<string> PutAsync(string endpoint, string body)
         {
-            var responce = await Client.PutAsync(BaseUrl + endpoint, (HttpContent?)body);
+            var requestBody = new StringContent(body);
+            var responce = await Client.PutAsync(BaseUrl + endpoint, requestBody);
             return await responce.Content.ReadAsStringAsync();
         }
         protected async Task<string> DeleteAsync(string endpoint)

@@ -6,61 +6,72 @@ using EmployeeAPITest.Drivers;
 
 namespace EmployeeAPITest.StepDefinitions
 {
-    public class PersonData
+    public class EmployeeData
     {
-        public string FirstName;
-        public string LastName;
+        public int EmployeeId;
+        public string? Responce;
     }
+
     [Binding]
     public class EmployeeTestsStepDefinitions : EmployeeRequestController
     {
+        private readonly EmployeeData employeeData;
+        public EmployeeTestsStepDefinitions(EmployeeData employeeData) 
+        {
+            this.employeeData = employeeData;
+        }
         [When(@"Send api request with employeee (.*) for get information about him")]
-        public async void WhenSendGETRequestWithEmployeeForGetInformationAboutHim(int userId)
+        public async Task WhenSendGETRequestWithEmployeeForGetInformationAboutHim(int userId)
         {
             var actualResponce = await this.GetEmployeeByIdAsync(userId);
+            employeeData.Responce = actualResponce;
+            employeeData.EmployeeId = userId;
         }
 
         [Then(@"The expected user data and the data from the response are the same \('([^']*)'\)")]
         public void ThenTheExpectedUserDataAndTheDataFromTheResponseAreTheSame(string method)
         {
             GetAssert getAssert = new GetAssert();
+            PostAssert postAssert = new PostAssert();
+            PutAssert putAssert = new PutAssert();
 
             bool result = false;
 
             if (method.Equals(ResponceConstants.GetMethod))
             {
-                result = getAssert.IsExpectedAndActualResponcesame(ScenarioContext.Current.Get<int>(ConstKeysForScenarioContext.UserIdForGetResponce),
-                      ScenarioContext.Current.Get<string>(ConstKeysForScenarioContext.GetInfoByIdResponce));
+                result = getAssert.IsGetRecordByIdCorrectResponce(employeeData.EmployeeId, employeeData.Responce);
             }
             else if (method.Equals(ResponceConstants.PostMethod))
             {
-                result = true;
+                result = postAssert.IsCreateRecordInDBCorrectResponce(employeeData.Responce);
             }
             else if (method.Equals(ResponceConstants.PutMethod))
             {
-                result = true;
+                result = putAssert.IsUpdatedRecordInDBCorrectResponce(employeeData.Responce);
             }
             Assert.IsTrue(result);
         }
 
         [Given(@"Send api request with employee data for create new record in database with '([^']*)'")]
         [When(@"Send api request with employee data for create new record in database with '([^']*)'")]
-        public async void WhenSendApiRequestWithEmployeeDataForCreateNewRecordInDatabaseWith(string p0)
+        public async Task WhenSendApiRequestWithEmployeeDataForCreateNewRecordInDatabaseWith(string p0)
         {
             var actualResponce = await this.PostCreateEmployeeRecord();
+            employeeData.Responce = actualResponce;
         }
 
         [When(@"Send api request with employee (.*) and new data for update information in database")]
-        public async void WhenSendApiRequestWithEmployeeIdAndNewDataForUpdateInformationInDatabase(int userId)
+        public async Task WhenSendApiRequestWithEmployeeIdAndNewDataForUpdateInformationInDatabase(int userId)
         {
             var actualResponce = await this.PutUpdateEmployeeRecord(userId);
+            employeeData.Responce = actualResponce;
         }
 
         [Given(@"Send api request with employee id for delete record from database")]
         [When(@"Send api request with employee id for delete record from database")]
-        public void WhenSendApiRequestWithEmployeeIdForDeleteRecordFromDatabase()
+        public async Task WhenSendApiRequestWithEmployeeIdForDeleteRecordFromDatabase()
         {
-            throw new PendingStepException();
+            var actualResponce = await this.DeleteRecordFromDatabase(1);
         }
 
         [Then(@"Record with employee data has been deleted from database")]

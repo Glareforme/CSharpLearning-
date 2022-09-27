@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EmployeeAPITest.Support.WorkWithResponce
+namespace EmployeeAPITest.Support.AssertsForTests
 {
-    internal class WorkWithPostResponce
+    internal class DeleteAssert
     {
     }
 }

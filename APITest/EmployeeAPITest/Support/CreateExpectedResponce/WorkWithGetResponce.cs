@@ -1,15 +1,13 @@
-﻿using EmployeeAPITest.Drivers;
-using System.Text.Json;
-using APITest.Constants;
+﻿using APITest.Constants;
 using EmployeeAPITest.Support.Models;
 
 namespace EmployeeAPITest.Support.WorkWithResponce
 {
-    public class WorkWithResponce : EmployeeRequestController
+    public class WorkWithGetResponce
     {
-        public EmployeeResponceModel ExpectedResultModelForSuccessFullGetByIdRequest(int userId)
+        public static EmployeeResponceModel ExpectedResponceModelForSuccessfullGetByIdRequest(int userId)
         {
-            EmployeeData model = new EmployeeData();
+            var model = new EmployeeData();
             switch (userId)
             {
                 case (1):
@@ -25,7 +23,13 @@ namespace EmployeeAPITest.Support.WorkWithResponce
             var expectedResponce = new EmployeeResponceModel()
             {
                 status = ResponceConstants.Status,
-                data = model,
+                data = new EmployeeData
+                {
+                    employee_name = model.employee_name,
+                    employee_salary = model.employee_salary,
+                    employee_age = model.employee_age,
+                    profile_image = model.profile_image
+                },
                 message = ResponceConstants.MessageGet
             };
             return expectedResponce;
