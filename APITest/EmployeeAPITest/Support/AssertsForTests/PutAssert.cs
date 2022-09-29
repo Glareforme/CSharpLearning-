@@ -11,7 +11,7 @@ namespace EmployeeAPITest.Support.AssertsForTests
         public bool IsUpdatedRecordInDBCorrectResponce(string actualResponce)
         {
             var expectedResult = putResponce.EmployeeResponceModelForSuccessfullPutRequestById();
-            var actualResult = JsonSerializer.Deserialize<EmployeeResponceModel>(actualResponce);
+            var actualResult = JsonSerializer.Deserialize<UpdateModelResponce>(actualResponce);
             if (expectedResult.status.Equals(actualResult.status) && expectedResult.message.Equals(actualResult.message))
             {
                return true;

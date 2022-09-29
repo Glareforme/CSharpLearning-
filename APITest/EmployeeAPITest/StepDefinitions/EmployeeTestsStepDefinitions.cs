@@ -3,6 +3,7 @@ using NUnit.Framework;
 using EmployeeAPITest.Support;
 using EmployeeAPITest.Support.AssertsForTests;
 using EmployeeAPITest.Drivers;
+using EmployeeAPITest.Support.WorkWithResponce;
 
 namespace EmployeeAPITest.StepDefinitions
 {
@@ -16,7 +17,7 @@ namespace EmployeeAPITest.StepDefinitions
     public class EmployeeTestsStepDefinitions : EmployeeRequestController
     {
         private readonly EmployeeData employeeData;
-        public EmployeeTestsStepDefinitions(EmployeeData employeeData) 
+        public EmployeeTestsStepDefinitions(EmployeeData employeeData)
         {
             this.employeeData = employeeData;
         }
@@ -54,7 +55,7 @@ namespace EmployeeAPITest.StepDefinitions
 
         [Given(@"Send api request with employee data for create new record in database with '([^']*)'")]
         [When(@"Send api request with employee data for create new record in database with '([^']*)'")]
-        public async Task WhenSendApiRequestWithEmployeeDataForCreateNewRecordInDatabaseWith(string p0)
+        public async Task WhenSendApiRequestWithEmployeeDataForCreateNewRecordInDatabaseWith(string typeOfRequest)
         {
             var actualResponce = await this.PostCreateEmployeeRecord();
             employeeData.Responce = actualResponce;
@@ -65,60 +66,74 @@ namespace EmployeeAPITest.StepDefinitions
         {
             var actualResponce = await this.PutUpdateEmployeeRecord(userId);
             employeeData.Responce = actualResponce;
+            employeeData.EmployeeId = userId;
         }
 
-        [Given(@"Send api request with employee id for delete record from database")]
-        [When(@"Send api request with employee id for delete record from database")]
-        public async Task WhenSendApiRequestWithEmployeeIdForDeleteRecordFromDatabase()
+        [Given(@"Send api request with employee (.*) for delete record from database")]
+        [When(@"Send api request with employee (.*) for delete record from database")]
+        public async Task WhenSendApiRequestWithEmployeeIdForDeleteRecordFromDatabase(int userId)
         {
-            var actualResponce = await this.DeleteRecordFromDatabase(1);
+            var actualResponce = await this.DeleteRecordFromDatabase(userId);
+            employeeData.Responce = actualResponce;
+            employeeData.EmployeeId = userId;
         }
 
         [Then(@"Record with employee data has been deleted from database")]
         public void ThenRecordWithEmployeeDataHasBeenDeletedFromDatabase()
         {
-            throw new PendingStepException();
+            DeleteAssert deleteAssert = new DeleteAssert();
+            Assert.IsTrue(deleteAssert.IsGetRecordByIdCorrectResponce(employeeData.Responce));
         }
 
-        [Then(@"In responce return message with exception")]
-        public void ThenInResponceReturnMessageWithException()
-        {
-            throw new PendingStepException();
-        }
         [When(@"Send api request with just created employeee id for get information about him")]
-        public void WhenSendApiRequestWithJustCreatedEmployeeeIdForGetInformationAboutHim()
+        public async Task WhenSendApiRequestWithJustCreatedEmployeeeIdForGetInformationAboutHim()
         {
-            throw new PendingStepException();
+            WorkWithPostResponce responce = new WorkWithPostResponce();
+            var justCreatedEmployeeID = responce.GetIdJustCreatedEmployee(employeeData.Responce);
+            var getInfo = await this.GetEmployeeByIdAsync(justCreatedEmployeeID);
+            employeeData.Responce = getInfo;
         }
 
         [Then(@"Responce does not contain added information")]
         public void ThenResponceDoesNotContainAddedInformation()
         {
-            throw new PendingStepException();
+            GetAssert assert = new GetAssert();
+            Assert.IsTrue(assert.IsResponceContainsInfoAboutEmployee(employeeData.Responce));
         }
 
         [When(@"Send api request with id just deleted employee for get information about him")]
-        public void WhenSendApiRequestWithIdJustDeletedEmployeeForGetInformationAboutHim()
+        public async Task WhenSendApiRequestWithIdJustDeletedEmployeeForGetInformationAboutHim()
         {
-            throw new PendingStepException();
+            var responce = await this.GetEmployeeByIdAsync(employeeData.EmployeeId);
+            employeeData.Responce = responce;
         }
 
         [Then(@"Database still contain data information about deleted employee")]
         public void ThenDatabaseStillContainDataInformationAboutDeletedEmployee()
         {
-            throw new PendingStepException();
+            DeleteAssert deleteAssert = new DeleteAssert();
+            Assert.IsTrue(deleteAssert.IsRecordStillInDataBase(employeeData.Responce));
         }
 
-        [Given(@"Send api request with employeee id for get current information about him")]
-        public void GivenSendApiRequestWithEmployeeeIdForGetCurrentInformationAboutHim()
+        [Given(@"Send api request with employeee (.*) for get current information about him")]
+        public async Task GivenSendApiRequestWithEmployeeeIdForGetCurrentInformationAboutHim(int userId)
         {
-            throw new PendingStepException();
+            var actualREsponce = await this.DeleteRecordFromDatabase(userId);
         }
 
         [Then(@"Information about user with this id has not been updated")]
-        public void ThenInformationAboutUserWithThisIdHasNotBeenUpdated()
+        public async Task ThenInformationAboutUserWithThisIdHasNotBeenUpdated()
         {
-            throw new PendingStepException();
+            GetAssert getAssert = new GetAssert();
+            var actualData = await this.GetEmployeeByIdAsync(employeeData.EmployeeId);
+            Assert.IsTrue(!getAssert.IsGetRecordByIdCorrectResponce(employeeData.EmployeeId, employeeData.Responce));
         }
+        [Then(@"In responce return message with exception")]
+        public void ThenInResponceReturnMessageWithException()
+        {
+            GetAssert getAssert = new GetAssert();
+            Assert.IsTrue(getAssert.ReturnMassageWithException(employeeData.Responce));
+        }
+
     }
 }

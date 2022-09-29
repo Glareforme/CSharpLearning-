@@ -33,7 +33,17 @@ namespace EmployeeAPITest.Drivers
             var requestBody = JsonSerializer.Serialize(employeeModel);
             return await this.PostAsync(PostCreateEmployeeUrl, requestBody);
         }
-
+        protected async Task<string> PostCreateEmployeeRecordIncorrectFormat()
+        {
+            var employeeModel = new EmployeeModel
+            {
+                Name = EmployeeCreateConst.name,
+                Salary = EmployeeCreateConst.incorrectSalary,
+                Age = EmployeeCreateConst.age
+            };
+            var requestBody = JsonSerializer.Serialize(employeeModel);
+            return await this.PostAsync(PostCreateEmployeeUrl, requestBody);
+        }
         protected async Task<string> PutUpdateEmployeeRecord(int employeeId)
         {
             var resource = string.Format(PutUpdateEmployeeByIdUrl, employeeId);

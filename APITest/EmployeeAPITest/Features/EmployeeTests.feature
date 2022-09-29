@@ -26,29 +26,41 @@ Examples:
 	| id |
 	| 1  |
 
-Scenario: Check if you can delete existing recond from base
-	When Send api request with employee id for delete record from database
+Scenario Outline: Check if you can delete existing recond from base
+	When Send api request with employee <id> for delete record from database
 	Then Record with employee data has been deleted from database
 
-Scenario: Check if id incorrect format return 400 statuscode with get request
-	When Send api request with employeee 'incorrect format data' for get information about him
+Examples:
+	| id |
+	| 1  |
+
+Scenario Outline: Check if id incorrect format return 400 statuscode with get request
+	When Send api request with employeee <id> for get information about him
 	Then In responce return message with exception
+
+Examples:
+	| id |
+	| 0  |
 
 Scenario: Check if you cant get data from just created record
 	Given Send api request with employee data for create new record in database with 'correct data'
 	When Send api request with just created employeee id for get information about him
 	Then Responce does not contain added information
 
-Scenario: Check if you delete data from base they stay there
-	Given Send api request with employee id for delete record from database
+Scenario Outline: Check if you delete data from base they stay there
+	Given Send api request with employee <id> for delete record from database
 	When Send api request with id just deleted employee for get information about him
 	Then Database still contain data information about deleted employee
 
-Scenario: Check if you update information about employee in base the data will not change
-	Given Send api request with employeee id for get current information about him
-	When Send api request with employee id and new data for update information in database
+Examples:
+	| id |
+	| 1  |
+
+Scenario Outline: Check if you update information about employee in base the data will not change
+	Given Send api request with employeee <id> for get current information about him
+	When Send api request with employee <id> and new data for update information in database
 	Then Information about user with this id has not been updated
 
-Scenario: Check if you input too long data in salary field return 404 statuscode with post request
-	When Send api request with employee data for create new record in database with 'too long salary'
-	Then In responce return message with exception
+Examples:
+	| id |
+	| 1  |

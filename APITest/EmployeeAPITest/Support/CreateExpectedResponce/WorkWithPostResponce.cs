@@ -1,5 +1,6 @@
 ﻿using APITest.Constants;
 using EmployeeAPITest.Support.Models;
+using System.Text.Json;
 
 namespace EmployeeAPITest.Support.WorkWithResponce
 {
@@ -19,6 +20,11 @@ namespace EmployeeAPITest.Support.WorkWithResponce
                 message = ResponceConstants.MessagePost
             };
             return expectedResponce;
+        }
+        public int GetIdJustCreatedEmployee(string responce)
+        {
+            var actualResponce = JsonSerializer.Deserialize<EmployeeResponceModel>(responce);
+            return actualResponce.data.id;
         }
     }
 }
