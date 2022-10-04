@@ -5,6 +5,7 @@
         public string status { get; set; }
 
         public EmployeeData data { get; set; }
+
         public string message { get; set; }
     }
 }

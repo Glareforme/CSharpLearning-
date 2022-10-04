@@ -18,5 +18,14 @@ namespace EmployeeAPITest.Support.AssertsForTests
             }
             return false;
         }
+        public bool IsUpdatedRecordInDBCorrectResponce(EmployeeResponceModel expectedResult, string actualResponce)
+        {
+            var actualResult = JsonSerializer.Deserialize<UpdateModelResponce>(actualResponce);
+            if(expectedResult.status.Equals(actualResult.status) && expectedResult.message.Equals(actualResult.message))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }

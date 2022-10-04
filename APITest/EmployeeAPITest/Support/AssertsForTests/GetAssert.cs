@@ -10,7 +10,17 @@ namespace EmployeeAPITest.Support.AssertsForTests
     {
         public bool IsGetRecordByIdCorrectResponce(int userId, string actualResponce)
         {
+
             var expectedResult = WorkWithGetResponce.ExpectedResponceModelForSuccessfullGetByIdRequest(userId);
+            var actualResult = JsonSerializer.Deserialize<EmployeeResponceModel>(actualResponce);
+            if (expectedResult.status.Equals(actualResult.status) && expectedResult.message.Equals(actualResult.message))
+            {
+                return true;
+            }
+            return false;
+        }
+        public bool IsGetRecordByIdCorrectResponce(EmployeeResponceModel expectedResult, string actualResponce)
+        {
             var actualResult = JsonSerializer.Deserialize<EmployeeResponceModel>(actualResponce);
             if (expectedResult.status.Equals(actualResult.status) && expectedResult.message.Equals(actualResult.message))
             {

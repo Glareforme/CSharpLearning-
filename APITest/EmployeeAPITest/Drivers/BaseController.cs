@@ -3,9 +3,10 @@ using APITest.Managers;
 
 namespace EmployeeAPITest.Drivers
 {
-    public class BaseController : ConfigManager
+    public class BaseController
     {
-        protected string BaseUrl => Config[ConfigConstants.BaseUrl];
+        ConfigManager config = new ConfigManager();
+        protected string BaseUrl => config.Config[ConfigConstants.BaseUrl];
 
         protected HttpClient Client => new HttpClient();
 

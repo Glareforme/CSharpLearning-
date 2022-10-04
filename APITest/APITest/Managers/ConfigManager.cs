@@ -6,7 +6,7 @@ namespace APITest.Managers
     {
         private const string ConfigFile = "config.json";
         
-        protected IConfigurationRoot Config => new ConfigurationBuilder()
+        public IConfigurationRoot Config => new ConfigurationBuilder()
                                                         .AddJsonFile(ConfigFile)
                                                         .Build();
     }

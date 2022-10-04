@@ -6,7 +6,7 @@ namespace EmployeeAPITest.Support.WorkWithResponce
 {
     internal class WorkWithPostResponce
     {
-        public EmployeeResponceModel ExpectedResponceModelForSuccessfullCreateIntDB()
+        public static EmployeeResponceModel ExpectedResponceModelForSuccessfullCreateIntDB()
         {
             var expectedResponce = new EmployeeResponceModel()
             {
@@ -16,6 +16,21 @@ namespace EmployeeAPITest.Support.WorkWithResponce
                     employee_name = EmployeeCreateConst.name,
                     employee_salary = EmployeeCreateConst.salary,
                     employee_age = EmployeeCreateConst.age,
+                },
+                message = ResponceConstants.MessagePost
+            };
+            return expectedResponce;
+        }
+        public static EmployeeResponceModel ExpectedResponceModelForSuccessfullCreateIntDB(EmployeeDataFromTable dataFromTable)
+        {
+            var expectedResponce = new EmployeeResponceModel()
+            {
+                status = ResponceConstants.Status,
+                data = new EmployeeData()
+                {
+                    employee_name = dataFromTable.Name,
+                    employee_salary = dataFromTable.Salary,
+                    employee_age = dataFromTable.Age
                 },
                 message = ResponceConstants.MessagePost
             };

@@ -8,16 +8,24 @@ namespace EmployeeAPITest.Support.AssertsForTests
 {
     internal class PostAssert
     {
-        WorkWithPostResponce workWithPostResponce = new WorkWithPostResponce();
         public bool IsCreateRecordInDBCorrectResponce(string actualResponce)
         {
-            var expectedResult = workWithPostResponce.ExpectedResponceModelForSuccessfullCreateIntDB();
+            var expectedResult = WorkWithPostResponce.ExpectedResponceModelForSuccessfullCreateIntDB();
             var actualResult = JsonSerializer.Deserialize<EmployeeResponceModel>(actualResponce);
             if (expectedResult.status.Equals(actualResult.status) && expectedResult.message.Equals(actualResult.message))
             {
                 return true;
             }
             return false;
+        }
+        public bool IsCreateRecordInDBCorrectResponce(EmployeeResponceModel expectedResult, string actualResponce)
+        {
+            var actualResult = JsonSerializer.Deserialize<EmployeeResponceModel>(actualResponce);
+            if(expectedResult.status.Equals(actualResult.status) && expectedResult.message.Equals(actualResult.message))
+            {
+                return true;
+            }
+            return false; 
         }
         public bool IsExceptionReturn(string actualResponce)
         {

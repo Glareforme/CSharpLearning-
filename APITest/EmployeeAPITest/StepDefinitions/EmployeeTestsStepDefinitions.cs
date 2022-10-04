@@ -1,139 +1,152 @@
 using APITest.Constants;
 using NUnit.Framework;
-using EmployeeAPITest.Support;
+using EmployeeAPITest.Support.Models;
 using EmployeeAPITest.Support.AssertsForTests;
 using EmployeeAPITest.Drivers;
 using EmployeeAPITest.Support.WorkWithResponce;
+using TechTalk.SpecFlow.Assist;
+using EmployeeAPITest.Support.CreateExpectedResponce;
 
 namespace EmployeeAPITest.StepDefinitions
 {
-    public class EmployeeData
+    public class EmployeeResponceInfo
     {
         public int EmployeeId;
         public string? Responce;
     }
 
     [Binding]
-    public class EmployeeTestsStepDefinitions : EmployeeRequestController
+    public class EmployeeTestsStepDefinitions
     {
-        private readonly EmployeeData employeeData;
-        public EmployeeTestsStepDefinitions(EmployeeData employeeData)
+        EmployeeRequestController controller = new EmployeeRequestController();
+        private readonly EmployeeResponceInfo employeeData;
+
+        public EmployeeTestsStepDefinitions(EmployeeResponceInfo employeeData)
         {
             this.employeeData = employeeData;
         }
-        [When(@"Send api request with employeee (.*) for get information about him")]
+
+        [When(@"the user requests the employee's information by the (.*)")]
         public async Task WhenSendGETRequestWithEmployeeForGetInformationAboutHim(int userId)
         {
-            var actualResponce = await this.GetEmployeeByIdAsync(userId);
+            var actualResponce = await controller.GetEmployeeByIdAsync(userId);
             employeeData.Responce = actualResponce;
             employeeData.EmployeeId = userId;
         }
 
-        [Then(@"The expected user data and the data from the response are the same \('([^']*)'\)")]
-        public void ThenTheExpectedUserDataAndTheDataFromTheResponseAreTheSame(string method)
+        [Then(@"the expected user data and the data from the response are the same \('([^']*)'\)")]
+        public void ThenTheExpectedUserDataAndTheDataFromTheResponseAreTheSame(string method, Table table)
         {
             GetAssert getAssert = new GetAssert();
             PostAssert postAssert = new PostAssert();
             PutAssert putAssert = new PutAssert();
-
             bool result = false;
+            List<EmployeeDataFromTable> expectedData = new List<EmployeeDataFromTable>();
+            var dataList = table.CreateSet<EmployeeDataFromTable>();
+            foreach (var item in dataList)
+            {
+                expectedData.Add(item);
+            }
 
             if (method.Equals(ResponceConstants.GetMethod))
             {
-                result = getAssert.IsGetRecordByIdCorrectResponce(employeeData.EmployeeId, employeeData.Responce);
+                var expectedResponce = WorkWithGetResponce.ExpectedResponceModelForSuccessfullGetByIdRequest(expectedData, employeeData.EmployeeId);
+                result = getAssert.IsGetRecordByIdCorrectResponce(expectedResponce, employeeData.Responce);
             }
             else if (method.Equals(ResponceConstants.PostMethod))
             {
-                result = postAssert.IsCreateRecordInDBCorrectResponce(employeeData.Responce);
+                var expectedResponce = WorkWithPostResponce.ExpectedResponceModelForSuccessfullCreateIntDB(expectedData[0]);
+                result = postAssert.IsCreateRecordInDBCorrectResponce(expectedResponce, employeeData.Responce);
             }
             else if (method.Equals(ResponceConstants.PutMethod))
             {
-                result = putAssert.IsUpdatedRecordInDBCorrectResponce(employeeData.Responce);
+                var expectedResponce = WorkWithPutResponce.EmployeeResponceModelForSuccessfullPutRequestById(expectedData[0]);
+                result = putAssert.IsUpdatedRecordInDBCorrectResponce(expectedResponce, employeeData.Responce);
             }
             Assert.IsTrue(result);
         }
 
-        [Given(@"Send api request with employee data for create new record in database with '([^']*)'")]
-        [When(@"Send api request with employee data for create new record in database with '([^']*)'")]
+        [Given(@"send api request with employee data for create new record in database with '([^']*)'")]
+        [When(@"the user create the employee's information  with '([^']*)'")]
         public async Task WhenSendApiRequestWithEmployeeDataForCreateNewRecordInDatabaseWith(string typeOfRequest)
         {
-            var actualResponce = await this.PostCreateEmployeeRecord();
+            var actualResponce = await controller.PostCreateEmployeeRecord();
             employeeData.Responce = actualResponce;
         }
 
-        [When(@"Send api request with employee (.*) and new data for update information in database")]
+        [When(@"the user send api request with employee (.*) and new data for update information in database")]
         public async Task WhenSendApiRequestWithEmployeeIdAndNewDataForUpdateInformationInDatabase(int userId)
         {
-            var actualResponce = await this.PutUpdateEmployeeRecord(userId);
+            var actualResponce = await controller.PutUpdateEmployeeRecord(userId);
             employeeData.Responce = actualResponce;
             employeeData.EmployeeId = userId;
         }
 
-        [Given(@"Send api request with employee (.*) for delete record from database")]
-        [When(@"Send api request with employee (.*) for delete record from database")]
+        [Given(@"send api request with employee (.*) for delete record from database")]
+        [When(@"the user delete the employee's information by the (.*) from database")]
         public async Task WhenSendApiRequestWithEmployeeIdForDeleteRecordFromDatabase(int userId)
         {
-            var actualResponce = await this.DeleteRecordFromDatabase(userId);
+            var actualResponce = await controller.DeleteRecordFromDatabase(userId);
             employeeData.Responce = actualResponce;
             employeeData.EmployeeId = userId;
         }
 
-        [Then(@"Record with employee data has been deleted from database")]
+        [Then(@"record with employee data has been deleted from database")]
         public void ThenRecordWithEmployeeDataHasBeenDeletedFromDatabase()
         {
             DeleteAssert deleteAssert = new DeleteAssert();
             Assert.IsTrue(deleteAssert.IsGetRecordByIdCorrectResponce(employeeData.Responce));
         }
 
-        [When(@"Send api request with just created employeee id for get information about him")]
+        [When(@"send api request with just created employeee id for get information about him")]
         public async Task WhenSendApiRequestWithJustCreatedEmployeeeIdForGetInformationAboutHim()
         {
             WorkWithPostResponce responce = new WorkWithPostResponce();
             var justCreatedEmployeeID = responce.GetIdJustCreatedEmployee(employeeData.Responce);
-            var getInfo = await this.GetEmployeeByIdAsync(justCreatedEmployeeID);
+            var getInfo = await controller.GetEmployeeByIdAsync(justCreatedEmployeeID);
             employeeData.Responce = getInfo;
         }
 
-        [Then(@"Responce does not contain added information")]
+        [Then(@"responce does not contain added information")]
         public void ThenResponceDoesNotContainAddedInformation()
         {
             GetAssert assert = new GetAssert();
             Assert.IsTrue(assert.IsResponceContainsInfoAboutEmployee(employeeData.Responce));
         }
 
-        [When(@"Send api request with id just deleted employee for get information about him")]
+        [When(@"the user send api request with id just deleted employee for get information about him")]
         public async Task WhenSendApiRequestWithIdJustDeletedEmployeeForGetInformationAboutHim()
         {
-            var responce = await this.GetEmployeeByIdAsync(employeeData.EmployeeId);
+            var responce = await controller.GetEmployeeByIdAsync(employeeData.EmployeeId);
             employeeData.Responce = responce;
         }
 
-        [Then(@"Database still contain data information about deleted employee")]
+        [Then(@"database still contain data information about deleted employee")]
         public void ThenDatabaseStillContainDataInformationAboutDeletedEmployee()
         {
             DeleteAssert deleteAssert = new DeleteAssert();
             Assert.IsTrue(deleteAssert.IsRecordStillInDataBase(employeeData.Responce));
         }
 
-        [Given(@"Send api request with employeee (.*) for get current information about him")]
+        [Given(@"the user delete the employee's information by the (.*)")]
         public async Task GivenSendApiRequestWithEmployeeeIdForGetCurrentInformationAboutHim(int userId)
         {
-            var actualREsponce = await this.DeleteRecordFromDatabase(userId);
+            var actualREsponce = await controller.DeleteRecordFromDatabase(userId);
         }
 
-        [Then(@"Information about user with this id has not been updated")]
+        [Then(@"information about user with this id has not been updated")]
         public async Task ThenInformationAboutUserWithThisIdHasNotBeenUpdated()
         {
             GetAssert getAssert = new GetAssert();
-            var actualData = await this.GetEmployeeByIdAsync(employeeData.EmployeeId);
+            var actualData = await controller.GetEmployeeByIdAsync(employeeData.EmployeeId);
             Assert.IsTrue(!getAssert.IsGetRecordByIdCorrectResponce(employeeData.EmployeeId, employeeData.Responce));
         }
-        [Then(@"In responce return message with exception")]
+
+        [Then(@"in responce return message with exception")]
         public void ThenInResponceReturnMessageWithException()
         {
             GetAssert getAssert = new GetAssert();
             Assert.IsTrue(getAssert.ReturnMassageWithException(employeeData.Responce));
         }
-
     }
 }

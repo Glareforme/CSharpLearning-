@@ -1,28 +1,19 @@
-﻿using EmployeeAPITest.Support.Models;
-using APITest.Constants;
+﻿using APITest.Constants;
 using APITest.Models;
-using EmployeeAPITest.Drivers;
-using System.Text.Json.Nodes;
-using System.Text.Json.Serialization;
 using System.Text.Json;
+using EmployeeAPITest.Support.Constants;
 
 namespace EmployeeAPITest.Drivers
 {
     public class EmployeeRequestController : BaseController
     {
-        private const string GetEmployeeUrl = "/employees";
-        private const string GetEmployeeByIdUrl = "/employee/{0}";
-        private const string PostCreateEmployeeUrl = "/create";
-        private const string PutUpdateEmployeeByIdUrl = "/update/{0}";
-        private const string DeleteEmployeeUrl = "/delete/{0}";
-
-        protected async Task<string> GetEmployeeByIdAsync(int employeeId)
+        public async Task<string> GetEmployeeByIdAsync(int employeeId)
         {
-            var resource = string.Format(GetEmployeeByIdUrl, employeeId);
+            var resource = string.Format(EndpointsForRequest.GetEmployeeByIdUrl, employeeId);
             return await this.GetAsync(resource);
         }
 
-        protected async Task<string> PostCreateEmployeeRecord() 
+        public async Task<string> PostCreateEmployeeRecord() 
         {
             var employeeModel = new EmployeeModel
             {
@@ -31,9 +22,10 @@ namespace EmployeeAPITest.Drivers
                 Age = EmployeeCreateConst.age
             };
             var requestBody = JsonSerializer.Serialize(employeeModel);
-            return await this.PostAsync(PostCreateEmployeeUrl, requestBody);
+            return await this.PostAsync(EndpointsForRequest.PostCreateEmployeeUrl, requestBody);
         }
-        protected async Task<string> PostCreateEmployeeRecordIncorrectFormat()
+
+        public async Task<string> PostCreateEmployeeRecordIncorrectFormat()
         {
             var employeeModel = new EmployeeModel
             {
@@ -42,11 +34,12 @@ namespace EmployeeAPITest.Drivers
                 Age = EmployeeCreateConst.age
             };
             var requestBody = JsonSerializer.Serialize(employeeModel);
-            return await this.PostAsync(PostCreateEmployeeUrl, requestBody);
+            return await this.PostAsync(EndpointsForRequest.PostCreateEmployeeUrl, requestBody);
         }
-        protected async Task<string> PutUpdateEmployeeRecord(int employeeId)
+
+        public async Task<string> PutUpdateEmployeeRecord(int employeeId)
         {
-            var resource = string.Format(PutUpdateEmployeeByIdUrl, employeeId);
+            var resource = string.Format(EndpointsForRequest.PutUpdateEmployeeByIdUrl, employeeId);
             var employeeModel = new EmployeeModel
             {
                 Name = EmployeeUpdateConst.name,
@@ -57,9 +50,9 @@ namespace EmployeeAPITest.Drivers
             return await this.PutAsync(resource, requestBody);
         }
 
-        protected async Task<string> DeleteRecordFromDatabase(int employeeId)
+        public async Task<string> DeleteRecordFromDatabase(int employeeId)
         {
-            var resource = string.Format(DeleteEmployeeUrl, employeeId);
+            var resource = string.Format(EndpointsForRequest.DeleteEmployeeUrl, employeeId);
             return await this.DeleteAsync(resource);
         }
     }
