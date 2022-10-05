@@ -1,6 +1,6 @@
 ﻿namespace APITest.Constants
 {
-    internal class RequestID
+    public class RequestID
     {
         public const int FirstSearchId = 1;
         public const int SecondSearchId = 21;

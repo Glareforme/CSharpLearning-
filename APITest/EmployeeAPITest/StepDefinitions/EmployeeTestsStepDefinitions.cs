@@ -29,6 +29,7 @@ namespace EmployeeAPITest.StepDefinitions
         [When(@"the user requests the employee's information by the (.*)")]
         public async Task WhenSendGETRequestWithEmployeeForGetInformationAboutHim(int userId)
         {
+            userId = RequestID.FirstSearchId;
             var actualResponce = await controller.GetEmployeeByIdAsync(userId);
             employeeData.Responce = actualResponce;
             employeeData.EmployeeId = userId;
@@ -41,13 +42,8 @@ namespace EmployeeAPITest.StepDefinitions
             PostAssert postAssert = new PostAssert();
             PutAssert putAssert = new PutAssert();
             bool result = false;
-            List<EmployeeDataFromTable> expectedData = new List<EmployeeDataFromTable>();
-            var dataList = table.CreateSet<EmployeeDataFromTable>();
-            foreach (var item in dataList)
-            {
-                expectedData.Add(item);
-            }
-
+            var expectedData = table.CreateSet<EmployeeDataFromTable>().ToList();
+          
             if (method.Equals(ResponceConstants.GetMethod))
             {
                 var expectedResponce = WorkWithGetResponce.ExpectedResponceModelForSuccessfullGetByIdRequest(expectedData, employeeData.EmployeeId);
@@ -66,26 +62,28 @@ namespace EmployeeAPITest.StepDefinitions
             Assert.IsTrue(result);
         }
 
-        [Given(@"send api request with employee data for create new record in database with '([^']*)'")]
-        [When(@"the user create the employee's information  with '([^']*)'")]
+        [Given(@"send api request with employee data to create a new record in the database with '([^']*)'")]
+        [When(@"the user creates the employee's information  with '([^']*)'")]
         public async Task WhenSendApiRequestWithEmployeeDataForCreateNewRecordInDatabaseWith(string typeOfRequest)
         {
             var actualResponce = await controller.PostCreateEmployeeRecord();
             employeeData.Responce = actualResponce;
         }
 
-        [When(@"the user send api request with employee (.*) and new data for update information in database")]
+        [When(@"the user sends api request with employee (.*) and new data for update information in the database")]
         public async Task WhenSendApiRequestWithEmployeeIdAndNewDataForUpdateInformationInDatabase(int userId)
         {
+            userId = RequestID.FirstSearchId;
             var actualResponce = await controller.PutUpdateEmployeeRecord(userId);
             employeeData.Responce = actualResponce;
             employeeData.EmployeeId = userId;
         }
 
-        [Given(@"send api request with employee (.*) for delete record from database")]
-        [When(@"the user delete the employee's information by the (.*) from database")]
+        [Given(@"send api request with employee (.*) to delete record from the database")]
+        [When(@"the user deletes the employee's information by the (.*) from the database")]
         public async Task WhenSendApiRequestWithEmployeeIdForDeleteRecordFromDatabase(int userId)
         {
+            userId = RequestID.FirstSearchId;
             var actualResponce = await controller.DeleteRecordFromDatabase(userId);
             employeeData.Responce = actualResponce;
             employeeData.EmployeeId = userId;
@@ -98,7 +96,7 @@ namespace EmployeeAPITest.StepDefinitions
             Assert.IsTrue(deleteAssert.IsGetRecordByIdCorrectResponce(employeeData.Responce));
         }
 
-        [When(@"send api request with just created employeee id for get information about him")]
+        [When(@"send api request with just created employee id for getting information about him")]
         public async Task WhenSendApiRequestWithJustCreatedEmployeeeIdForGetInformationAboutHim()
         {
             WorkWithPostResponce responce = new WorkWithPostResponce();
@@ -107,21 +105,21 @@ namespace EmployeeAPITest.StepDefinitions
             employeeData.Responce = getInfo;
         }
 
-        [Then(@"responce does not contain added information")]
+        [Then(@"response does not contain added information")]
         public void ThenResponceDoesNotContainAddedInformation()
         {
             GetAssert assert = new GetAssert();
             Assert.IsTrue(assert.IsResponceContainsInfoAboutEmployee(employeeData.Responce));
         }
 
-        [When(@"the user send api request with id just deleted employee for get information about him")]
+        [When(@"the user send api request with id just deleted the employee for getting information about him")]
         public async Task WhenSendApiRequestWithIdJustDeletedEmployeeForGetInformationAboutHim()
         {
             var responce = await controller.GetEmployeeByIdAsync(employeeData.EmployeeId);
             employeeData.Responce = responce;
         }
 
-        [Then(@"database still contain data information about deleted employee")]
+        [Then(@"the database still contains data information about deleted employee")]
         public void ThenDatabaseStillContainDataInformationAboutDeletedEmployee()
         {
             DeleteAssert deleteAssert = new DeleteAssert();
@@ -131,10 +129,11 @@ namespace EmployeeAPITest.StepDefinitions
         [Given(@"the user delete the employee's information by the (.*)")]
         public async Task GivenSendApiRequestWithEmployeeeIdForGetCurrentInformationAboutHim(int userId)
         {
+            userId = RequestID.FirstSearchId;
             var actualREsponce = await controller.DeleteRecordFromDatabase(userId);
         }
 
-        [Then(@"information about user with this id has not been updated")]
+        [Then(@"information about the user with this id has not been updated")]
         public async Task ThenInformationAboutUserWithThisIdHasNotBeenUpdated()
         {
             GetAssert getAssert = new GetAssert();
@@ -142,7 +141,7 @@ namespace EmployeeAPITest.StepDefinitions
             Assert.IsTrue(!getAssert.IsGetRecordByIdCorrectResponce(employeeData.EmployeeId, employeeData.Responce));
         }
 
-        [Then(@"in responce return message with exception")]
+        [Then(@"in response return message with the exception")]
         public void ThenInResponceReturnMessageWithException()
         {
             GetAssert getAssert = new GetAssert();
