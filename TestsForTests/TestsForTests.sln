@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32616.157
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskNUnit", "TestsForTests\TaskNUnit.csproj", "{0186F394-2E55-4451-B9D0-7B896B013FD2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskNUnit", "TestsForTests\TaskNUnit.csproj", "{0186F394-2E55-4451-B9D0-7B896B013FD2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Selenium", "Selenium\Selenium.csproj", "{D51CD01D-1465-4F8B-8C00-AD95F3167FD2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DBTests", "Selenium\DBTests.csproj", "{D51CD01D-1465-4F8B-8C00-AD95F3167FD2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
